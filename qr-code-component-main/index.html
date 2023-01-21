@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | QR code component</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    *{
+      margin: 0;
+      box-sizing: border-box;
+    }
+    html, main{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      width: 100vw;
+      height: 100vh;
+      background-color: #D6E1F0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 0.9em;
+    }
+    .main-section{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: white;
+      width: 300px;
+      height: 500px;  
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .main-section .element01{
+      width: 94%;
+      margin: 3%;
+      border-radius: 20px;
+    }
+    .main-section .element02{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 30%;
+      padding: 15px;
+    }
+    .main-section .element03 {
+      font-size: 11px;
+      text-align: center;
+      background-color: rgb(137, 43, 226);
+      width: 100%;
+      color: white;
+      margin-top: 3%;
+      padding: 5px;
+    }
+    .main-section .element03 a { color: hsl(228, 100%, 79%); }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="main-section">
+      <img class="element01" src="images/image-qr-code.png" alt="">
+      <div class="element02">
+        <h2>Aprimore suas habilidades de Front-End criando projetos</h2>
+        <p>Escaneie o código QR para visitar o <strong>Frontend Mentor</strong> e leve suas habilidades de codificação para o próximo nível!</p>
+      </div>
+      <div class="element03">
+        <p>Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.</p>
+        <p>Coded by <a href="#">Hugo Henrique</a>.</p>
+      </div>
+    </section>
+    
+  </main>
+  
+</body>
+</html>
