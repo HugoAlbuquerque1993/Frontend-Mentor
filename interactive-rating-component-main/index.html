@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Suporte</title>
+		<link
+			rel="shortcut icon"
+			href="images/favicon-32x32.png"
+			type="image/x-icon"
+		/>
+		<link rel="stylesheet" href="./styles/main.css" />
+		<link rel="stylesheet" href="styles/brightBorders.css" />
+		<script src="./scripts/script.js" defer></script>
+	</head>
+	<body>
+		<section class="avaliar brightBorders">
+			<span class="border"></span>
+			<span class="border"></span>
+			<span class="border"></span>
+			<span class="border"></span>
+			<div><img src="images/icon-star.svg" alt="" /></div>
+			<h1>Como estamos indo?</h1>
+			<p>
+				Por favor, informe-nos sua experiência com nossa equipe de
+				suporte. Todo comentário é analisado para nos ajudar a melhorar
+				nossos serviços!
+			</p>
+			<div class="avaliacoes">
+				<span onclick="clicked(0)">1</span>
+				<span onclick="clicked(1)">2</span>
+				<span onclick="clicked(2)">3</span>
+				<span onclick="clicked(3)">4</span>
+				<span onclick="clicked(4)">5</span>
+			</div>
+			<input type="button" value="ENVIAR" onclick="enviar()" />
+			<div class="extra">
+				Quer nos contar algo? Fique a vontade!
+				<textarea
+					name=""
+					id=""
+					rows="3"
+					maxlength="100"
+					placeholder="(Opcional) O que achou de sua experiência e o que podemos fazer para melhorá-la!"
+				></textarea>
+			</div>
+		</section>
+
+		<section class="ultimaCaixa brightBorders">
+			<span class="border"></span>
+			<span class="border"></span>
+			<span class="border"></span>
+			<span class="border"></span>
+			<img src="images/illustration-thank-you.svg" alt="imagem final" />
+			<div class="resAvaliacao">
+				Você nos avaliou como <span>5</span> de 5!
+			</div>
+			<div class="textoFinal">
+				Nós apreciamos você por dedicar um pouco do seu tempo para nos
+				informar de sua experiência com nossa plataforma. Caso precise
+				de mais informações, clique <a href="#">aqui</a>.
+			</div>
+			<h1>Muito Obrigado!</h1>
+		</section>
+
+		<footer class="attribution">
+			<div>
+				Challenge by
+				<a
+					href="https://www.frontendmentor.io?ref=challenge"
+					target="_blank"
+					>Frontend Mentor</a
+				>.
+			</div>
+			<div>Coded by <a href="#">Hugo Albuquerque</a>.</div>
+		</footer>
+	</body>
+</html>
