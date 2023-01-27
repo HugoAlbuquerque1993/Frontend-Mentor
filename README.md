@@ -3,12 +3,14 @@
 
 <p>## Difficulty: Newbie</p>
 <p>
-    <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/qr-code-component-main/index.html">1- QR Code</a>
+    <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/qr-code-component-main/index.html">1-QR Code</a>
 </p>
 <p>
-    <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/interactive-rating-component-main/index.html">2- Interactive Rating</a>
+    <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/interactive-rating-component-main/index.html">2-Interactive Rating</a>
 </p>
 <p>
-    <a>3- Comming soon</a>
+    <a>3-Comming soon</a>
 </p>
-<p>href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/???/index.html"</p>
+<!--
+(href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/???/index.html")
+-->
