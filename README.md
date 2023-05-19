@@ -1,26 +1,26 @@
-<h1># Desafios do site Frontend Mentor</h1>
+<h2>Desafios do site Frontend Mentor</h2>
 
-<h2>Difficulty 1: Newbie</h2>
+<h3>Difficulty 1: Newbie</h3>
 
 <p>
-    <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/qr-code-component-main/index.html">QR Code</a>
+    1- <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/qr-code-component-main/index.html">QR Code</a>
 </p>
 <p>
-    <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/interactive-rating-component-main/index.html">Interactive Rating</a>
+    2- <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/interactive-rating-component-main/index.html">Interactive Rating</a>
 </p>
-<h2>Difficulty 2: Junior</h2>
+<h3>Difficulty 2: Junior</h3>
 <p>
-    <a>Comming soon</a>
+    1- Comming soon
 </p>
-<h2>Difficulty 3: Intermedite</h2>
+<h3>Difficulty 3: Intermedite</h3>
 <p>
-    <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/launch-countdown-timer-main/index.html">Countdown Timer</a>
+    1- <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/launch-countdown-timer-main/index.html">Countdown Timer</a>
 </p>
-<h2>Difficulty 4: Advanced</h2>
+<h3>Difficulty 4: Advanced</h3>
 <p>
-    <a>Comming soon</a>
+    1- Comming soon
 </p>
-<h2>Difficulty 4: Advanced</h2>
+<h3>Difficulty 4: Advanced</h3>
 <p>
-    <a>Maybe ='D</a>
+    1- Maybe ='D
 </p>
