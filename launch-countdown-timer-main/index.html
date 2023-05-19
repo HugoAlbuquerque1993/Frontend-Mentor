@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Frontend Mentor | Launch countdown timer</title>
+
+		<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<header>WE'RE LAUNCHING SOON</header>
+
+		<main>
+			<div class="timer">
+				<div class="column">
+					<div class="count">
+						<div class="top">
+							<div class="copy"></div>
+						</div>
+						<div class="bot"></div>
+						<div class="num"></div>
+					</div>
+					<div class="name">DAYS</div>
+				</div>
+
+				<div class="column">
+					<div class="count">
+						<div class="top">
+							<div class="copy"></div>
+						</div>
+						<div class="bot"></div>
+						<div class="num"></div>
+					</div>
+					<div class="name">HOURS</div>
+				</div>
+
+				<div class="column">
+					<div class="count">
+						<div class="top">
+							<div class="copy"></div>
+						</div>
+						<div class="bot"></div>
+						<div class="num"></div>
+					</div>
+					<div class="name">MINUTES</div>
+				</div>
+
+				<div class="column">
+					<div class="count">
+						<div class="top">
+							<div class="copy"></div>
+						</div>
+						<div class="bot"></div>
+						<div class="num"></div>
+					</div>
+					<div class="name">SECONDS</div>
+				</div>
+			</div>
+		</main>
+
+		<footer>
+			<img id="hills" src="images/pattern-hills.svg" alt="pattern-hills" />
+			<img id="facebook" class="social" src="images/icon-facebook.svg" alt="facebook" />
+			<img id="pinterest" class="social" src="images/icon-pinterest.svg" alt="pinterest" />
+			<img id="instagram" class="social" src="images/icon-instagram.svg" alt="instagram" />
+		</footer>
+
+		<script>
+			function render(arr) {
+				const allNum = document.querySelectorAll(".num")
+
+				allNum.forEach((num, ind) => {
+					if (num.innerHTML != arr[ind]) {
+						let copy = num.parentElement.firstElementChild.firstElementChild
+
+						setTimeout(() => {
+							copy.classList.add("move")
+							num.style.opacity = 0
+						}, 50 + ind * 50)
+
+						setTimeout(() => {
+							num.style.opacity = 1
+							num.innerHTML = arr[ind]
+						}, 500)
+						setTimeout(() => {
+							copy.classList.remove("move")
+						}, 900)
+					}
+				})
+			}
+
+			function timeCount() {
+				let t = new Date()
+				let d = t.getDate().toString()
+				let h = t.getHours().toString()
+				let m = t.getMinutes().toString()
+				let s = t.getSeconds().toString()
+
+				let arr = [d, h, m, s]
+
+				arr = arr.map((el) => {
+					return el.length < 2 ? "0" + el : el
+				})
+
+				render(arr)
+			}
+
+			timeCount()
+			setInterval(() => {
+				timeCount()
+			}, 1000)
+		</script>
+	</body>
+</html>
