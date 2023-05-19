@@ -1,4 +1,4 @@
-<h2>Desafios do site Frontend Mentor</h2>
+<h1>Desafios do site Frontend Mentor</h1>
 
 <h3>Difficulty 1: Newbie</h3>
 
@@ -10,7 +10,7 @@
 </p>
 <h3>Difficulty 2: Junior</h3>
 <p>
-    1- Comming soon
+    1- Em breve
 </p>
 <h3>Difficulty 3: Intermedite</h3>
 <p>
@@ -18,9 +18,9 @@
 </p>
 <h3>Difficulty 4: Advanced</h3>
 <p>
-    1- Comming soon
+    1- Em breve
 </p>
-<h3>Difficulty 4: Advanced</h3>
+<h3>Difficulty 5: Guru</h3>
 <p>
-    1- Maybe ='D
+    1- Em breve (Ou não) ='D
 </p>
