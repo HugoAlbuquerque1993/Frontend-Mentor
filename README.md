@@ -12,7 +12,7 @@
 <p>
     1- Em breve
 </p>
-<h3>Difficulty 3: Intermedite</h3>
+<h3>Difficulty 3: Intermediate</h3>
 <p>
     1- <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/launch-countdown-timer-main/index.html">Countdown Timer</a>
 </p>
