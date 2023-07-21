@@ -1,7 +1,7 @@
 var map = L.map("map")
 var myIcon = L.icon({
-    iconUrl: '/images/icon-location.svg',
-    iconSize: [70, 95],
+    iconUrl: './images/icon-location.svg',
+    iconSize: [38, 95],
     iconAnchor: [22, 94],
     popupAnchor: [-3, -76],
 });
@@ -65,7 +65,7 @@ function changeView(obj) {
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 	}).addTo(map)
 
-	L.marker(location, {icon: myIcon}).addTo(map)
+	L.marker(location).addTo(map)
 }
 
 const myRegex = /^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$/
