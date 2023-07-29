@@ -12,7 +12,7 @@
 
 header {
 	background-image: url(images/pattern-bg-desktop.png);
-	background-position: top right;
+	background-position: center center;
 	background-size: cover;
 	position: relative;
 	display: flex;
@@ -24,9 +24,10 @@ header {
 }
 
 header > h2 {
-	margin-top: 20px;
+	margin-top: 30px;
 }
 header > .inpDiv {
+	display: flex;
 	position: relative;
 }
 
@@ -37,9 +38,6 @@ header > .inpDiv > input {
 	font-size: 1rem;
 	position: relative;
 	z-index: 402;
-}
-header > .inpDiv > input[type="number"]::-webkit-inner-spin-button {
-	display: none;
 }
 header > .inpDiv > .btnSearch {
 	position: absolute;
@@ -68,8 +66,7 @@ header > .inpDiv > .btnSearch:hover > img {
 }
 
 header > .infoDiv {
-	position: absolute;
-	top: 70%;
+	position: relative;
 	background-color: #fff;
 	max-width: 750px;
 	display: flex;
@@ -139,7 +136,7 @@ main > #map {
 		flex-direction: column;
 		height: 120px;
 		width: 350px;
-		gap: 10px;
+		gap: 1rem;
 	}
 	header > .infoDiv > div {
 		gap: 0px;
@@ -148,29 +145,30 @@ main > #map {
 		opacity: 0;
 	}
 }
-@media (max-width: 500px) {
+@media (max-width: 600px) {
 	header {
 		height: 35vh;
+	}
+	header > .inpDiv {
+		width: 75vw;
+	}
+	header > .inpDiv > input {
+		width: 100%;
 	}
 	header > .infoDiv {
 		flex-direction: row;
 		height: auto;
-		top: 60%;
-		width: 250px;
+		width: 70vw;
 		text-align: center;
 		padding: 10px;
 	}
-	header > .inpDiv > input {
-		width: 250px;
-	}
 	header > .infoDiv > div {
-		width: 250px;
-		gap: 0px;
+		width: 100%;
 	}
 	main > #map {
 		height: 65vh;
 	}
 	header > .infoDiv > i {
-		display: flex;
+		display: none;
 	}
 }
