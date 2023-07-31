@@ -68,11 +68,10 @@ header > .inpDiv > .btnSearch:hover > img {
 header > .infoDiv {
 	position: relative;
 	background-color: #fff;
-	max-width: 750px;
 	display: flex;
 	justify-content: space-between;
 	padding: 25px;
-	gap: 10%;
+	gap: 5%;
 	border-radius: 20px;
 	box-shadow: 1px 1px 10px #00000040;
 	z-index: 401;
@@ -83,7 +82,7 @@ header > .infoDiv > div {
 	position: relative;
 	flex-direction: column;
 	gap: 10px;
-	width: 200px;
+	min-width: 140px;
 }
 header > .infoDiv > div:not(:first-child)::before {
 	content: "";
@@ -91,7 +90,7 @@ header > .infoDiv > div:not(:first-child)::before {
 	background-color: #00000040;
 	top: 50%;
 	transform: translateY(-50%);
-	left: -20%;
+	left: -15%;
 	height: 50px;
 	width: 1px;
 }
