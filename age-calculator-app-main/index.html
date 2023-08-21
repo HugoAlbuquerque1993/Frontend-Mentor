@@ -131,26 +131,30 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				height: 60px;
+				position: relative;
 			}
 			.container form .bot > .line {
-				width: 80%;
+				width: 100%;
 				height: 1px;
 				background-color: #33333330;
 			}
-			.container .bot .subBtn {
+			.container form .bot .subBtn {
+				position: absolute;
+				right: 0;
 				background-color: var(--myBlue);
 				border-radius: 50%;
 				padding: 10px 14px;
 				cursor: pointer;
 				transition: 0.5s;
 			}
-			.container .bot .subBtn:hover:not(:disabled),
-			.container .bot .subBtn:focus:not(:disabled) {
+			.container form .bot .subBtn:hover:not(:disabled),
+			.container form .bot .subBtn:focus:not(:disabled) {
 				background-color: #333;
 				transform: scale(1.1);
 				box-shadow: 2px 2px 5px burlywood;
 			}
-			.container .bot .subBtn:disabled {
+			.container form .bot .subBtn:disabled {
 				cursor: auto;
 				opacity: 0.7;
 			}
@@ -166,6 +170,8 @@
 			}
 
 			footer {
+				display: flex;
+				gap: 10px;
 				position: absolute;
 				bottom: 0;
 				padding: 5px;
@@ -175,9 +181,33 @@
 				background-color: #333;
 				color: #fff;
 			}
-			footer > a {
+			footer a {
 				color: yellow;
-				margin-left: 0.5rem;
+				margin-left: 0.2rem;
+			}
+
+			@media (max-width: 500px) {
+				.container {
+					width: 350px;
+				}
+				.container form .bot {
+					margin-top: 10px;
+					height: 80px;
+				}
+				.container form .bot .subBtn {
+					right: auto;
+				}
+				.container .result {
+					font-size: 2rem;
+				}
+				footer {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					font-size: 0.8rem;
+					gap: initial;
+				}
 			}
 		</style>
 	</head>
@@ -191,15 +221,15 @@
 					<div class="top">
 						<div>
 							<label for="day">day</label>
-							<input type="number" name="day" id="inpDay" />
+							<input type="number" name="day" id="inpDay" placeholder="DD" />
 						</div>
 						<div>
 							<label for="month">month</label>
-							<input type="number" name="month" id="inpMonth" />
+							<input type="number" name="month" id="inpMonth" placeholder="MM" />
 						</div>
 						<div>
 							<label for="year">year</label>
-							<input type="number" name="year" id="inpYear" />
+							<input type="number" name="year" id="inpYear" placeholder="YYYY" />
 						</div>
 					</div>
 
@@ -229,7 +259,10 @@
 			</section>
 		</main>
 
-		<footer class="attribution">Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"> Frontend Mentor </a>. Coded by <a href="https://github.com/HugoAlbuquerque1993" target="_blank"> Hugo Albuquerque</a>.</footer>
+		<footer class="attribution">
+			<p>Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.</p>
+			<p>Coded by <a href="https://github.com/HugoAlbuquerque1993" target="_blank">Hugo Albuquerque</a>.</p>
+		</footer>
 
 		<script>
 			const thisYear = new Date().getFullYear()
