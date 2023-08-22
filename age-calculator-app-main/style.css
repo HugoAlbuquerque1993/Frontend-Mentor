@@ -57,6 +57,7 @@ main {
     padding: 30px 35px;
     border-radius: 15px 15px 100px 15px;
     position: relative;
+    transition: .5s;
 }
 
 .container form {
@@ -115,7 +116,6 @@ main {
 }
 .container #clearBtn:hover {
     background-color: #333;
-    transform: scale(1.2);
 }
 
 .container form .bot {
@@ -124,6 +124,7 @@ main {
     justify-content: center;
     height: 60px;
     position: relative;
+    transition: .5s;
 }
 .container form .bot > .line {
     width: 100%;
@@ -142,7 +143,6 @@ main {
 .container form .bot .subBtn:hover:not(:disabled),
 .container form .bot .subBtn:focus:not(:disabled) {
     background-color: #333;
-    transform: scale(1.1);
     box-shadow: 2px 2px 5px burlywood;
 }
 .container form .bot .subBtn:disabled {
@@ -154,6 +154,7 @@ main {
     font-family: "Poppins-extrabolditalic", sans-serif;
     font-size: 2.5rem;
     line-height: 4rem;
+    transition: .5s;
 }
 .container .result .numSpan {
     color: var(--myBlue);
@@ -177,7 +178,7 @@ footer a {
     margin-left: 0.2rem;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
     .container {
         width: 350px;
     }
@@ -186,7 +187,8 @@ footer a {
         height: 80px;
     }
     .container form .bot .subBtn {
-        right: auto;
+        right: 50%;
+        transform: translateX(50%);
     }
     .container .result {
         font-size: 2rem;

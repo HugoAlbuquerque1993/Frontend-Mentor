@@ -90,11 +90,10 @@ function step03(myArray, e) {
 	singPlur[1].innerHTML = months > 1 ? "months" : "month"
 	singPlur[2].innerHTML = days > 1 ? "days" : "day"
 
-	bonus.childNodes[1].innerHTML = onlydays
+	bonus.childNodes[3].innerHTML = onlydays
 	bonus.style.opacity = 1
 
-	clearBtn.setAttribute("disabled", "disabled")
-	saveText()
+	saveText([...document.querySelectorAll(".result h2")])
 	clearAll(e)
 }
 
@@ -129,32 +128,33 @@ function clearAll(e) {
 
 	e.target.setAttribute("disabled", "disabled")
 	inputs[0].focus()
-	clearBtn.classList.add("ocult")
 
 	if (e) {
 		if (e.target.id == "clearBtn") {
 			numSpan.forEach((el) => {
 				el.innerHTML = "--"
+				bonus.style.opacity = 0
+				clearBtn.setAttribute("class", "ocult")
+				clearBtn.setAttribute("disabled", "disabled")
 			})
 
 			singPlur.forEach((el, ind) => {
 				ind == 0 ? (el.innerHTML = "years") : ind == 1 ? (el.innerHTML = "months") : (el.innerHTML = "days")
 			})
 		}
-		bonus.style.opacity = 0
 	}
 
 	enableBtn()
-	saveText()
+	saveText([...document.querySelectorAll(".result h2")])
 }
 
-//
-function saveText() {
+function saveText(h2Array) {
 	const elArray = []
 	const textArray = []
+	clearBtn.setAttribute("disabled", "disabled")
 
-	;[...document.querySelectorAll(".result h2")].forEach((h2) => {
-		;[...h2.children].forEach((span) => {
+	h2Array.forEach((el) => {
+		;[...el.children].forEach((span) => {
 			let myText = span.innerHTML
 			span.innerHTML = ""
 			elArray.push(span)
@@ -162,21 +162,25 @@ function saveText() {
 		})
 	})
 
-	drawText(elArray, textArray, 125)
+	drawText(elArray, textArray)
 }
 
 function drawText(elArray, textArray, setTime) {
-	let time = setTime ? setTime : 125
+	let time = setTime ? setTime : 75
 	let count = 1
 
 	textArray.forEach((text, ind) => {
 		for (i of text) {
 			let letter = i
+			count++
 
 			setTimeout(function () {
 				elArray[ind].innerHTML += letter
-			}, setTime * count)
-			count++
+			}, time * count)
 		}
 	})
+
+	setTimeout(() => {
+		clearBtn.removeAttribute("disabled")
+	}, time * 26)
 }
