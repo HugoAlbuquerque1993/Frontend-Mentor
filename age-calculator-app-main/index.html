@@ -266,23 +266,20 @@
 
 		<script>
 			const thisYear = new Date().getFullYear()
+			const bonus = document.querySelector("#bonus")
+			const subBtn = document.querySelector(".subBtn")
+
+			const inputs = [...document.querySelectorAll("input[type='number']")]
+			inputs.forEach((el) => el.addEventListener("input", step01))
 
 			const myForm = document.querySelector("#myForm")
 			myForm.addEventListener("submit", step02)
 
-			const subBtn = document.querySelector(".subBtn")
-			const inputs = [...document.querySelectorAll("input[type='number']")]
-			inputs.map((el, ind) => {
-				el.addEventListener("input", step01)
-			})
-
-			const numSpan = [...document.querySelectorAll(".numSpan")]
-			const singPlur = [...document.querySelectorAll(".singPlur")]
-
 			const clearBtn = document.querySelector("#clearBtn")
 			clearBtn.addEventListener("click", clearAll)
 
-			const bonus = document.querySelector("#bonus")
+			const numSpan = [...document.querySelectorAll(".numSpan")]
+			const singPlur = [...document.querySelectorAll(".singPlur")]
 
 			function step01(e) {
 				const val = e.target.value
