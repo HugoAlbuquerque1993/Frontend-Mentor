@@ -1,0 +1,202 @@
+@font-face {
+    font-family: Poppins;
+    src: url(assets/fonts/Poppins-Regular.ttf);
+}
+@font-face {
+    font-family: Poppins-extrabolditalic;
+    src: url(assets/fonts/Poppins-ExtraBoldItalic.ttf);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --myBlue: #8751fa;
+}
+
+body {
+    background-color: #e7e7e7;
+    font-family: "Poppins", sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+#bonus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px 20px;
+    opacity: 0;
+    transition: 1s;
+    cursor: context-menu;
+}
+#bonus span {
+    margin: 0 6px;
+    font-size: 1.4rem;
+    color: var(--myBlue);
+    font-family: Poppins-extrabolditalic, sans-serif;
+}
+
+.container {
+    background-color: #ffffff;
+    width: 460px;
+    padding: 30px 35px;
+    border-radius: 15px 15px 100px 15px;
+    position: relative;
+}
+
+.container form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.container form .top {
+    display: flex;
+    gap: 20px;
+}
+.container form .top > div {
+    display: flex;
+    flex-direction: column;
+}
+.container form label {
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    color: #000000d0;
+    letter-spacing: 2px;
+}
+.container form input[type="number"] {
+    padding: 5px 10px;
+    width: 80px;
+    letter-spacing: 2px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    border: 1px solid #00000080;
+    cursor: pointer;
+}
+.container form input[type="number"]:focus {
+    outline: 2px solid #c1a7f5;
+}
+.container form input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+}
+.container #clearBtn.ocult {
+    cursor: auto;
+    opacity: 0;
+}
+.container #clearBtn {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 20px;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+    border-radius: 50%;
+    background-color: var(--myBlue);
+    cursor: pointer;
+    opacity: 1;
+    transition: 0.5s;
+}
+.container #clearBtn:hover {
+    background-color: #333;
+    transform: scale(1.2);
+}
+
+.container form .bot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    position: relative;
+}
+.container form .bot > .line {
+    width: 100%;
+    height: 1px;
+    background-color: #33333330;
+}
+.container form .bot .subBtn {
+    position: absolute;
+    right: 0;
+    background-color: var(--myBlue);
+    border-radius: 50%;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.container form .bot .subBtn:hover:not(:disabled),
+.container form .bot .subBtn:focus:not(:disabled) {
+    background-color: #333;
+    transform: scale(1.1);
+    box-shadow: 2px 2px 5px burlywood;
+}
+.container form .bot .subBtn:disabled {
+    cursor: auto;
+    opacity: 0.7;
+}
+
+.container .result {
+    font-family: "Poppins-extrabolditalic", sans-serif;
+    font-size: 2.5rem;
+    line-height: 4rem;
+}
+.container .result .numSpan {
+    color: var(--myBlue);
+    margin-right: 10px;
+}
+
+footer {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    bottom: 0;
+    padding: 5px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+    color: #fff;
+}
+footer a {
+    color: yellow;
+    margin-left: 0.2rem;
+}
+
+@media (max-width: 500px) {
+    .container {
+        width: 350px;
+    }
+    .container form .bot {
+        margin-top: 10px;
+        height: 80px;
+    }
+    .container form .bot .subBtn {
+        right: auto;
+    }
+    .container .result {
+        font-size: 2rem;
+    }
+    footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.8rem;
+        gap: initial;
+    }
+}
