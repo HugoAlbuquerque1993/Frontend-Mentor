@@ -127,7 +127,10 @@ function clearAll(e) {
 	})
 
 	e.target.setAttribute("disabled", "disabled")
-	inputs[0].focus()
+
+	if (widthDevice > 600) {
+		inputs[0].focus()
+	}
 
 	if (e) {
 		if (e.target.id == "clearBtn") {
@@ -184,3 +187,13 @@ function drawText(elArray, textArray, setTime) {
 		clearBtn.removeAttribute("disabled")
 	}, time * 26)
 }
+
+let widthDevice = 0
+window.addEventListener("load", () => {
+	widthDevice = window.innerWidth
+	console.log(widthDevice)
+})
+window.addEventListener("resize", () => {
+	widthDevice = window.innerWidth
+	console.log(widthDevice)
+})
