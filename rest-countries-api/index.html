@@ -8,16 +8,23 @@
 		<script src="https://kit.fontawesome.com/f5dd4dba75.js" crossorigin="anonymous"></script>
 	</head>
 	<body>
-		<header class="positionContent">
-			<h2>Where's in the world.</h2>
-			<div class="changeMode">
-				<i class="fa-regular fa-moon fa-spin" style="color: #000000"></i>
-				Dark Mode
-			</div>
+		<header>
+			<section class="positionContent">
+				<h2>Where's in the world?</h2>
+				<div class="changeMode">
+					<i class="fa-regular fa-moon fa-spin" style="margin-right: 5px"></i>
+					Dark Mode
+				</div>
+			</section>
 		</header>
+
 		<main>
 			<section class="filteringArea positionContent">
-				<input type="search" id="searchBar" />
+				<div class="searchDiv">
+					<i class="fa-solid fa-magnifying-glass searchIcon" style="color: #000000"></i>
+					<input type="search" id="searchBar" placeholder="Search for a country..." />
+				</div>
+
 				<select id="filterByRegion">
 					<option value="null" hidden>Filter By Region</option>
 					<option value="Africa">Africa</option>
@@ -27,6 +34,12 @@
 					<option value="Oceania">Oceania</option>
 				</select>
 			</section>
+
+			<section class="containerSection positionContent">
+				<div class="container"></div>
+			</section>
 		</main>
+
+		<script src="script.js" type="module"></script>
 	</body>
 </html>
