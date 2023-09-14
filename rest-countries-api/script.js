@@ -78,24 +78,24 @@ searchBar.addEventListener("focusout", () => {
 
 const handleTextFilter = (e) => {
 	let text = e.target.value.toLowerCase()
-    container.innerHTML = ""
+	container.innerHTML = ""
 
-    if(text == "") {
-        return handleFilter(apiResponse)
-    }
+	if (text == "") {
+		return handleFilter(apiResponse)
+	}
 
 	if (region == "null") {
 		apiResponse.forEach((el) => {
 			let name = String(el.name.common).toLowerCase()
 			if (name.includes(text)) {
-                handleDrawBox(el)
+				handleDrawBox(el)
 			}
 		})
 	} else {
-        regionList.forEach((el) => {
-			let name = String(el.name.common)
+		regionList.forEach((el) => {
+			let name = String(el.name.common).toLowerCase()
 			if (name.includes(text)) {
-                handleDrawBox(el)
+				handleDrawBox(el)
 			}
 		})
 	}
@@ -104,7 +104,7 @@ searchBar.addEventListener("input", handleTextFilter)
 
 const filterByRegion = document.querySelector("#filterByRegion")
 const handleRegionFilter = (e) => {
-    searchBar.value = ""
+	searchBar.value = ""
 	region = e.target.value
 	container.innerHTML = ""
 
