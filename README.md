@@ -3,7 +3,7 @@
 <h3>Difficulty 1: Newbie</h3>
 
 <p>
-    1. <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/qr-code-component-main/index.html">QR Code</a>
+    1. <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/qr-code-component-main/index.html" target="_black">QR Code</a>
 </p>
 <p>
     2. <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/interactive-rating-component-main/index.html">Interactive Rating</a>
@@ -21,7 +21,7 @@
 </p>
 <h3>Difficulty 4: Advanced</h3>
 <p>
-    1. Em breve
+    1. <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/rest-countries-api/index.html">Rest Countries API</a>
 </p>
 <h3>Difficulty 5: Guru</h3>
 <p>
