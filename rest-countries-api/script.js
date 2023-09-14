@@ -1,34 +1,9 @@
-console.clear()
-
-const searchIcon = document.querySelector(".searchIcon")
-const searchBar = document.querySelector("#searchBar")
-searchBar.addEventListener("focus", () => {
-	searchIcon.classList.add("fa-bounce")
-})
-searchBar.addEventListener("focusout", () => {
-	searchIcon.classList.remove("fa-bounce")
-})
-
-let limit = 11
+let limit = 12
+let region = "null"
+let apiResponse = []
+let regionList = []
 
 const container = document.querySelector(".container")
-
-const errorToFetch = (err) => {
-	const containerSection = document.querySelector(".containerSection")
-
-	const errorImage = document.createElement("img")
-	errorImage.src = "./img/error404.png"
-	errorImage.style = `
-        width: 90%;
-        background-color: #ffffff20;
-        border-radius: 50px;
-    `
-
-    containerSection.removeChild(container)
-	containerSection.appendChild(errorImage)
-
-    console.table(err)
-}
 
 const handleFetch = async () => {
 	const apiJson = await fetch("https://restcountries.com/v3.1/all")
@@ -41,7 +16,24 @@ const handleFetch = async () => {
 		handleFilter(apiJson)
 	}
 
-	return apiJson
+	return (apiResponse = apiJson)
+}
+
+const errorToFetch = (err) => {
+	const containerSection = document.querySelector(".containerSection")
+
+	const errorImage = document.createElement("img")
+	errorImage.src = "./img/error404.png"
+	errorImage.style = `
+        width: 90%;
+        background-color: #ffffff20;
+        border-radius: 50px;
+    `
+
+	containerSection.removeChild(container)
+	containerSection.appendChild(errorImage)
+
+	console.table(err)
 }
 
 const handleFilter = (resp) => {
@@ -53,8 +45,6 @@ const handleFilter = (resp) => {
 }
 
 const handleDrawBox = (country) => {
-	console.log(country)
-
 	const mainDiv = document.createElement("div")
 	mainDiv.classList.add("box")
 
@@ -74,4 +64,61 @@ const handleDrawBox = (country) => {
 	container.appendChild(mainDiv)
 }
 
-const apiResponse = handleFetch()
+handleFetch()
+
+//Animation Search Icon & Inputs Functions
+const searchIcon = document.querySelector("#searchIcon")
+const searchBar = document.querySelector("#searchBar")
+searchBar.addEventListener("focus", () => {
+	searchIcon.classList.add("fa-bounce")
+})
+searchBar.addEventListener("focusout", () => {
+	searchIcon.classList.remove("fa-bounce")
+})
+
+const handleTextFilter = (e) => {
+	let text = e.target.value.toLowerCase()
+    container.innerHTML = ""
+
+    if(text == "") {
+        return handleFilter(apiResponse)
+    }
+
+	if (region == "null") {
+		apiResponse.forEach((el) => {
+			let name = String(el.name.common).toLowerCase()
+			if (name.includes(text)) {
+                handleDrawBox(el)
+			}
+		})
+	} else {
+        regionList.forEach((el) => {
+			let name = String(el.name.common)
+			if (name.includes(text)) {
+                handleDrawBox(el)
+			}
+		})
+	}
+}
+searchBar.addEventListener("input", handleTextFilter)
+
+const filterByRegion = document.querySelector("#filterByRegion")
+const handleRegionFilter = (e) => {
+    searchBar.value = ""
+	region = e.target.value
+	container.innerHTML = ""
+
+	if (region == "null") {
+		handleFilter(apiResponse)
+	} else {
+		regionList = []
+
+		apiResponse.forEach((el) => {
+			if (el.region == region) {
+				regionList.push(el)
+				handleDrawBox(el)
+			}
+		})
+	}
+}
+filterByRegion.addEventListener("change", handleRegionFilter)

@@ -12,7 +12,7 @@
 			<section class="positionContent">
 				<h2>Where's in the world?</h2>
 				<div class="changeMode">
-					<i class="fa-regular fa-moon fa-spin" style="margin-right: 5px"></i>
+					<i class="fa-regular fa-moon fa-spin"></i>
 					Dark Mode
 				</div>
 			</section>
@@ -20,22 +20,28 @@
 
 		<main>
 			<section class="filteringArea positionContent">
-				<div class="searchDiv">
-					<i class="fa-solid fa-magnifying-glass searchIcon" style="color: #000000"></i>
+				<div class="hiddenBackDiv">
+					<button id="backBtn">
+						<i class="fa-solid fa-backward fa-beat-fade"></i>
+						Back
+					</button>
+				</div>
+				<div class="searchDiv" style="position: relative;">
+					<i id="searchIcon" class="fa-solid fa-magnifying-glass" style="color: #000000"></i>
 					<input type="search" id="searchBar" placeholder="Search for a country..." />
 				</div>
 
 				<select id="filterByRegion">
-					<option value="null" hidden>Filter By Region</option>
+					<option value="null">Filter By Region</option>
 					<option value="Africa">Africa</option>
-					<option value="America">America</option>
+					<option value="Americas">America</option>
 					<option value="Asia">Asia</option>
-					<option value="Europa">Europa</option>
+					<option value="Europe">Europa</option>
 					<option value="Oceania">Oceania</option>
 				</select>
 			</section>
 
-			<section class="containerSection positionContent">
+			<section class="containerSection positionContent" style="justify-content: center;">
 				<div class="container"></div>
 			</section>
 		</main>
