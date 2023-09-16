@@ -189,6 +189,9 @@ header {
 	height: 300px;
 }
 .box.countryInfo div {
+	/* mudar */
+	display: flex;
+	flex-direction: column;
 }
 @media (max-width: 600px) {
 	.container {
