@@ -10,11 +10,11 @@
 
 ::-webkit-scrollbar {
 	width: 10px;
-    background-color: yellow;
+	background-color: yellow;
 }
 ::-webkit-scrollbar-thumb {
-    background-color: #333;
-    border-radius: 5px;
+	background-color: #333;
+	border-radius: 5px;
 }
 * {
 	margin: 0;
@@ -30,7 +30,7 @@ body {
 	flex-direction: column;
 }
 i {
-    margin-right: 5px;
+	margin-right: 5px;
 }
 
 header {
@@ -61,16 +61,16 @@ header {
 	padding-bottom: 0;
 }
 .filteringArea :is(input, select, button) {
-    border: 1px solid #00000040;
-    box-shadow: 0px 0px 2px var(--darkGrayInp);
-    background-color: white;
+	border: 1px solid #00000040;
+	box-shadow: 0px 0px 2px var(--darkGrayInp);
+	background-color: white;
 	padding: 5px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+	border-radius: 5px;
+	cursor: pointer;
 }
 .hiddenBackDiv {
-    display: none;
-    display: flex;
+	display: flex;
+	display: none;
 }
 .searchDiv #searchIcon {
 	position: absolute;
@@ -82,7 +82,16 @@ header {
 	border-radius: 5px;
 	outline: none;
 	width: 300px;
-    cursor: auto;
+	cursor: auto;
+}
+
+.containerSection {
+	overflow: hidden;
+}
+.errorImage {
+	width: clamp(550px, 95%, 900px);
+	background-color: #ffffff20;
+	border-radius: 50px;
 }
 
 .container {

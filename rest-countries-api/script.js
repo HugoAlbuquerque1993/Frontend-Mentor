@@ -2,11 +2,12 @@ let limit = 12
 let region = "null"
 let apiResponse = []
 let regionList = []
+const apiUrl = "https://restcountries.com/v3.1/all"
 
 const container = document.querySelector(".container")
 
 const handleFetch = async () => {
-	const apiJson = await fetch("https://restcountries.com/v3.1/all")
+	const apiJson = await fetch()
 		.then((res) => res.json())
 		.catch((err) => err)
 
@@ -23,12 +24,8 @@ const errorToFetch = (err) => {
 	const containerSection = document.querySelector(".containerSection")
 
 	const errorImage = document.createElement("img")
+	errorImage.classList.add("errorImage")
 	errorImage.src = "./img/error404.png"
-	errorImage.style = `
-        width: 90%;
-        background-color: #ffffff20;
-        border-radius: 50px;
-    `
 
 	containerSection.removeChild(container)
 	containerSection.appendChild(errorImage)
@@ -38,8 +35,9 @@ const errorToFetch = (err) => {
 
 const handleFilter = (resp) => {
 	const filtered = resp
+	console.log(resp.length)
 
-	for (let i = 0; i < limit; i++) {
+	for (let i = 0; i < resp.length; i++) {
 		handleDrawBox(filtered[i])
 	}
 }
@@ -80,14 +78,13 @@ const handleTextFilter = (e) => {
 	let text = e.target.value.toLowerCase()
 	container.innerHTML = ""
 
-	if (text == "") {
-		return handleFilter(apiResponse)
-	}
+	if (text == "") return handleFilter(apiResponse)
 
 	if (region == "null") {
 		apiResponse.forEach((el) => {
 			let name = String(el.name.common).toLowerCase()
 			if (name.includes(text)) {
+				console.log(el)
 				handleDrawBox(el)
 			}
 		})
