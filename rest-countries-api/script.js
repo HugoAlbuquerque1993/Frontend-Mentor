@@ -23,6 +23,7 @@ const config = {
 	},
 }
 
+const containerSection = document.querySelector(".containerSection")
 const container = document.querySelector(".container")
 
 const handleFetch = async () => {
@@ -33,15 +34,14 @@ const handleFetch = async () => {
 	if (apiJson.name == "TypeError") {
 		errorToFetch(apiJson)
 	} else {
-		handleFilter(apiJson)
+		mainLoad(apiJson)
 	}
 
-	return (config.apiResponse = apiJson)
+	config.apiResponse = apiJson
 }
+handleFetch()
 
 const errorToFetch = (err) => {
-	const containerSection = document.querySelector(".containerSection")
-
 	const errorImage = document.createElement("img")
 	errorImage.classList.add("errorImage")
 	errorImage.src = "./img/error404.png"
@@ -52,16 +52,18 @@ const errorToFetch = (err) => {
 	console.table(err)
 }
 
-const handleFilter = (resp) => {
+const mainLoad = (resp) => {
 	const filtered = resp
 	config.loadedValue = 0
+	container.innerHTML = ""
+	searchBar.value = ""
 
 	for (let i = 0; i < config.loadLimit; i++) {
 		handleDrawBox(filtered[i])
 	}
 }
 
-const handleDrawBox = (country) => {
+const handleDrawBox = (country, className) => {
 	const infoList = config.idiom[`${config.selectedIdiom}`]
 	const name = idiomName(country)
 
@@ -74,25 +76,36 @@ const handleDrawBox = (country) => {
 
 	const textArea = document.createElement("div")
 	textArea.innerHTML = `
-	<h3>${name}</h3>
-	<p><strong>${infoList.pop}: </strong>${country.population}</p>
-	<p><strong>${infoList.reg}: </strong>${country.region}</p>
-	<p><strong>${infoList.cap}: </strong>${country.capital}</p>
+		<h3>${name}</h3>
+		<p><strong>${infoList.pop}: </strong>${country.population}</p>
+		<p><strong>${infoList.reg}: </strong>${country.region}</p>
+		<p><strong>${infoList.cap}: </strong>${country.capital}</p>
     `
 	mainDiv.appendChild(textArea)
-	mainDiv.addEventListener("click", () => boxInfo(country))
+	
+	if(className) {
+		mainDiv.classList.add(className)
+		containerSection.removeChild(container)
+		containerSection.appendChild(mainDiv)
+	} else {
+		mainDiv.addEventListener("click", () => boxInfo(country))
+		container.appendChild(mainDiv)
+	}
 
-	container.appendChild(mainDiv)
 	config.loadedValue++
 	loadedCountries[1].innerHTML = config.loadedValue
 
 	setTimeout(() => {
 		mainDiv.style.opacity = 1
-	}, 250 * config.loadedValue)
+	}, 125 * config.loadedValue)
 }
 
 const boxInfo = (obj) => {
+	let className = "countryInfo"
+	container.innerHTML = ""
+	config.loadedValue = 1
 	changeInputs()
+	handleDrawBox(obj, className)
 }
 
 const changeInputs = () => {
@@ -107,12 +120,13 @@ const idiomName = (obj) => {
 	return config.selectedIdiom == "eng" ? obj.name.common : obj.translations[`${config.selectedIdiom}`].common
 }
 
-handleFetch()
-
 //Animation Search Icon & Inputs Functions
 const loadedCountries = [...document.querySelectorAll(".loadedCountries > *")]
 document.querySelector("#backBtn").addEventListener("click", () => {
 	changeInputs()
+	containerSection.innerHTML = ""
+	containerSection.appendChild(container)
+	mainLoad(config.apiResponse)
 })
 const searchIcon = document.querySelector("#searchIcon")
 const searchBar = document.querySelector("#searchBar")
@@ -129,7 +143,7 @@ const handleTextFilter = (evt) => {
 	loadedCountries[1].innerHTML = 0
 	config.loadedValue = 0
 
-	if (text == "") return handleFilter(config.apiResponse)
+	if (text == "") return mainLoad(config.apiResponse)
 
 	if (config.selectedRegion == "null") {
 		config.apiResponse.forEach((el) => {
@@ -155,7 +169,7 @@ const handleRegionFilter = (evt) => {
 	config.loadedValue = 0
 
 	if (config.selectedRegion == "null") {
-		handleFilter(config.apiResponse)
+		mainLoad(config.apiResponse)
 	} else {
 		config.regList = []
 
@@ -178,7 +192,7 @@ const changeTranslate = (evt) => {
 		loadedCountries[0].innerHTML = config.idiom[`${config.selectedIdiom}`].display
 		container.innerHTML = ""
 		searchBar.value = ""
-		handleFilter(config.apiResponse)
+		mainLoad(config.apiResponse)
 	}
 }
 chooseRadio.forEach((el) => addEventListener("click", changeTranslate))
