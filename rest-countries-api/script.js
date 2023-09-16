@@ -1,13 +1,32 @@
-let limit = 12
-let region = "null"
-let apiResponse = []
-let regionList = []
-const apiUrl = "https://restcountries.com/v3.1/all"
+const config = {
+	apiUrl: "https://restcountries.com/v3.1/all",
+	loadLimit: 12,
+	loadedValue: 0,
+	apiResponse: [],
+	regList: [],
+	selectedRegion: "null",
+	selectedIdiom: "eng",
+
+	idiom: {
+		eng: {
+			display: "Loaded Countries",
+			pop: "Population",
+			reg: "Region",
+			cap: "Capital",
+		},
+		por: {
+			display: "Países Carregados",
+			pop: "População",
+			reg: "Região",
+			cap: "Capital",
+		},
+	},
+}
 
 const container = document.querySelector(".container")
 
 const handleFetch = async () => {
-	const apiJson = await fetch()
+	const apiJson = await fetch(config.apiUrl)
 		.then((res) => res.json())
 		.catch((err) => err)
 
@@ -17,7 +36,7 @@ const handleFetch = async () => {
 		handleFilter(apiJson)
 	}
 
-	return (apiResponse = apiJson)
+	return (config.apiResponse = apiJson)
 }
 
 const errorToFetch = (err) => {
@@ -35,14 +54,17 @@ const errorToFetch = (err) => {
 
 const handleFilter = (resp) => {
 	const filtered = resp
-	console.log(resp.length)
+	config.loadedValue = 0
 
-	for (let i = 0; i < resp.length; i++) {
+	for (let i = 0; i < config.loadLimit; i++) {
 		handleDrawBox(filtered[i])
 	}
 }
 
 const handleDrawBox = (country) => {
+	const infoList = config.idiom[`${config.selectedIdiom}`]
+	const name = idiomName(country)
+
 	const mainDiv = document.createElement("div")
 	mainDiv.classList.add("box")
 
@@ -51,20 +73,47 @@ const handleDrawBox = (country) => {
 	mainDiv.appendChild(flag)
 
 	const textArea = document.createElement("div")
-	textArea.innerHTML += `
-        <h3>${country.name.common}</h3>
-        <p><strong>Population: </strong>${country.population}</p>
-        <p><strong>Region: </strong>${country.region}</p>
-        <p><strong>Capital: </strong>${country.capital}</p>
+	textArea.innerHTML = `
+	<h3>${name}</h3>
+	<p><strong>${infoList.pop}: </strong>${country.population}</p>
+	<p><strong>${infoList.reg}: </strong>${country.region}</p>
+	<p><strong>${infoList.cap}: </strong>${country.capital}</p>
     `
 	mainDiv.appendChild(textArea)
+	mainDiv.addEventListener("click", () => boxInfo(country))
 
 	container.appendChild(mainDiv)
+	config.loadedValue++
+	loadedCountries[1].innerHTML = config.loadedValue
+
+	setTimeout(() => {
+		mainDiv.style.opacity = 1
+	}, 250 * config.loadedValue)
+}
+
+const boxInfo = (obj) => {
+	changeInputs()
+}
+
+const changeInputs = () => {
+	const filteringArea = [...document.querySelectorAll(".filteringArea > *")]
+
+	filteringArea.forEach((el) => {
+		el.classList.toggle("hidden")
+	})
+}
+
+const idiomName = (obj) => {
+	return config.selectedIdiom == "eng" ? obj.name.common : obj.translations[`${config.selectedIdiom}`].common
 }
 
 handleFetch()
 
 //Animation Search Icon & Inputs Functions
+const loadedCountries = [...document.querySelectorAll(".loadedCountries > *")]
+document.querySelector("#backBtn").addEventListener("click", () => {
+	changeInputs()
+})
 const searchIcon = document.querySelector("#searchIcon")
 const searchBar = document.querySelector("#searchBar")
 searchBar.addEventListener("focus", () => {
@@ -74,48 +123,62 @@ searchBar.addEventListener("focusout", () => {
 	searchIcon.classList.remove("fa-bounce")
 })
 
-const handleTextFilter = (e) => {
-	let text = e.target.value.toLowerCase()
+const handleTextFilter = (evt) => {
+	let text = evt.target.value.toLowerCase()
 	container.innerHTML = ""
+	loadedCountries[1].innerHTML = 0
+	config.loadedValue = 0
 
-	if (text == "") return handleFilter(apiResponse)
+	if (text == "") return handleFilter(config.apiResponse)
 
-	if (region == "null") {
-		apiResponse.forEach((el) => {
-			let name = String(el.name.common).toLowerCase()
-			if (name.includes(text)) {
-				console.log(el)
-				handleDrawBox(el)
-			}
+	if (config.selectedRegion == "null") {
+		config.apiResponse.forEach((el) => {
+			let name = idiomName(el).toLowerCase()
+
+			if (name.includes(text)) handleDrawBox(el)
 		})
 	} else {
-		regionList.forEach((el) => {
-			let name = String(el.name.common).toLowerCase()
-			if (name.includes(text)) {
-				handleDrawBox(el)
-			}
+		config.regList.forEach((el) => {
+			let name = idiomName(el).toLowerCase()
+
+			if (name.includes(text)) handleDrawBox(el)
 		})
 	}
 }
 searchBar.addEventListener("input", handleTextFilter)
 
 const filterByRegion = document.querySelector("#filterByRegion")
-const handleRegionFilter = (e) => {
+const handleRegionFilter = (evt) => {
+	config.selectedRegion = evt.target.value
 	searchBar.value = ""
-	region = e.target.value
 	container.innerHTML = ""
+	config.loadedValue = 0
 
-	if (region == "null") {
-		handleFilter(apiResponse)
+	if (config.selectedRegion == "null") {
+		handleFilter(config.apiResponse)
 	} else {
-		regionList = []
+		config.regList = []
 
-		apiResponse.forEach((el) => {
-			if (el.region == region) {
-				regionList.push(el)
+		config.apiResponse.forEach((el) => {
+			if (el.region == config.selectedRegion) {
+				config.regList.push(el)
 				handleDrawBox(el)
 			}
 		})
 	}
 }
 filterByRegion.addEventListener("change", handleRegionFilter)
+
+//Choose Radio
+const chooseRadio = [...document.querySelectorAll(".chooseRadio > label")]
+const changeTranslate = (evt) => {
+	if (evt.target.type == "radio") {
+		let radioValue = evt.target.value
+		config.selectedIdiom = radioValue
+		loadedCountries[0].innerHTML = config.idiom[`${config.selectedIdiom}`].display
+		container.innerHTML = ""
+		searchBar.value = ""
+		handleFilter(config.apiResponse)
+	}
+}
+chooseRadio.forEach((el) => addEventListener("click", changeTranslate))

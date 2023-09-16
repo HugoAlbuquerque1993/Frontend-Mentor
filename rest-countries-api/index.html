@@ -33,15 +33,17 @@
 					<input type="search" id="searchBar" placeholder="Search for a country..." />
 				</div>
 
-				<div>
-					<label for="EnglishRadio">
-						English
-						<input type="radio" name="translate" id="EnglishRadio" checked>
-					</label>
-					<label for="PortugueseRadio">
-						<input type="radio" name="translate" id="PortugueseRadio">
-						Português
-					</label>
+				<div class="chooseRadio">
+					<input type="radio" name="translate" id="EnglishRadio" value="eng" checked />
+					<label for="EnglishRadio"> English </label>
+
+					<input type="radio" name="translate" id="PortugueseRadio" value="por" />
+					<label for="PortugueseRadio"> Português </label>
+				</div>
+
+				<div class="loadedCountries">
+					<span>Loaded Countries</span>:
+					<span>0</span>
 				</div>
 
 				<select id="filterByRegion">
