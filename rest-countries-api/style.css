@@ -6,6 +6,7 @@
 	--veryDarkBlueTxt: #111517; /*LM TXT*/
 	--darkGrayInp: #858585; /* LM INPUT*/
 	--veryLightGrayBg: #fafafa; /*LM BG*/
+	--myWhite: #ffffff;
 }
 
 ::-webkit-scrollbar {
@@ -53,7 +54,7 @@ header {
 .changeMode:hover {
 	background-color: var(--darkGrayInp);
 	box-shadow: 0px 0px 20px 2px crimson;
-	color: white;
+	color: var(--myWhite);
 }
 
 /* main */
@@ -69,9 +70,9 @@ header {
 	display: none;
 }
 .filteringArea :is(input, select, button, label) {
-	border: 1px solid #00000040;
+	border: 1px solid var(--darkGrayInp);
 	box-shadow: 0px 0px 2px var(--darkGrayInp);
-	background-color: white;
+	background-color: var(--myWhite);
 	padding: 5px 20px;
 	border-radius: 5px;
 	transition: 0.5s;
@@ -104,7 +105,7 @@ header {
 }
 .chooseRadio input:checked + label {
 	background-color: var(--darkBlueEl);
-	color: white;
+	color: var(--myWhite);
 }
 .chooseRadio input {
 	display: none;
@@ -114,7 +115,7 @@ header {
 	display: flex;
 	gap: 5px;
 	justify-content: center;
-	border-bottom: 1px dashed black;
+	border-bottom: 1px dashed var(--veryDarkBlueBg);
 	min-width: 150px;
 }
 @media (max-width: 440px) {
@@ -127,6 +128,7 @@ header {
 
 /* Content  */
 .containerSection {
+	display: flex;
 	overflow: hidden;
 }
 .errorImage {
@@ -146,12 +148,11 @@ header {
 	display: flex;
 	flex-direction: column;
 	border-radius: 5px;
-	width: clamp(220px, 100%, 380px);
 	text-align: left;
 	gap: 15px;
-	background-color: white;
+	background-color: var(--myWhite);
 	overflow: hidden;
-	box-shadow: 2px 2px 10px #0000002b;
+	box-shadow: 2px 2px 10px var(--darkGrayInp);
 	opacity: 0;
 	transition: 0.5s;
 	cursor: pointer;
@@ -161,46 +162,70 @@ header {
 }
 .box img {
 	width: 100%;
-	max-width: 450px;
-	height: 150px;
-	box-shadow: 0px 0px 10px 2px black;
+	height: 20vw;
+	max-height: 150px;
+	box-shadow: 0px 0px 10px 2px var(--veryDarkBlueBg);
 }
-.box div {
-	margin: 10px;
+.box > div {
+	margin: 10px 15px;
 }
 .box h3 {
 	margin-bottom: 10px;
 }
-.box.countryInfo {
-	width: 100vw;
+
+.countryInfo {
+	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
 	cursor: auto;
-	border-radius: 0px;
-	box-shadow: none;
-	background-color: transparent;
-	font-size: 1.2em;
+	gap: 20px;
+	font-size: clamp(1em, 1.8vw, 1.1em);
+	transition: 0.5s;
+	opacity: 0;
 }
-.box.countryInfo:hover {
-	transform: scale(1);
+.countryInfo img {
+	width: clamp(360px, 90vw, 500px);
+	height: clamp(220px, 50vw, 300px);
 }
-.box.countryInfo img {
-	box-shadow: 0px 0px 0px;
-	height: 300px;
+.countryInfo h3 {
+	font-size: 1.5em;
 }
-.box.countryInfo div {
-	/* mudar */
+.countryInfo .textArea {
+	width: clamp(360px, 90vw, 500px);
+}
+.countryInfo .middleDiv {
+	gap: 10px;
+	display: flex;
+	flex-direction: row;
+	margin: 30px auto;
+}
+.countryInfo .middleDiv > div {
+	width: clamp(170px, 45vw, 245px);
+}
+.countryInfo .bdcDiv {
 	display: flex;
 	flex-direction: column;
+	width: clamp(360px, 90vw, 500px);
+	gap: 10px;
+}
+.countryInfo .bdcDiv p {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+.countryInfo .bdcDiv span {
+	padding: 5px 15px;
+	border: 1px solid var(--darkGrayInp);
+	margin-right: 15px;
 }
 @media (max-width: 600px) {
 	.container {
 		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 	}
 	.box img {
-		height: 200px;
-	}
-	.box.countryInfo img {
-		height: 250px;
+		height: 50vw;
+		max-height: 250px;
 	}
 }
