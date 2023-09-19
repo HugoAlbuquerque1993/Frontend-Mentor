@@ -226,6 +226,7 @@ header {
 	padding: 5px 15px;
 	border: 1px solid var(--darkBlueEl);
 	margin-right: 15px;
+	cursor: pointer;
 }
 @media (max-width: 600px) {
 	.container {

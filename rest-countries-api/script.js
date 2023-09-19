@@ -109,8 +109,6 @@ const handleDrawBox = (country, className) => {
 	mainDiv.appendChild(textArea)
 
 	if (className) {
-		console.log(country)
-
 		mainDiv.classList.add(className)
 		mainDiv.classList.remove("box")
 
@@ -148,16 +146,19 @@ const handleDrawBox = (country, className) => {
 
 		bdcArray.forEach((el) => {
 			const bdcSpan = document.createElement("span")
-			bdcSpan.innerHTML = el
+			bdcSpan.innerHTML = idiomName(el)
+			bdcSpan.addEventListener("click", () => boxInfo(el, false))
 			bdcPar.appendChild(bdcSpan)
 		})
 		bdcDiv.appendChild(bdcPar)
 		textArea.appendChild(bdcDiv)
 
-		containerSection.removeChild(container)
+		if (containerSection.hasChildNodes()) {
+			containerSection.removeChild(containerSection.lastElementChild)
+		}
 		containerSection.appendChild(mainDiv)
 	} else {
-		mainDiv.addEventListener("click", () => boxInfo(country))
+		mainDiv.addEventListener("click", () => boxInfo(country, true))
 		container.appendChild(mainDiv)
 		config.loadedValue++
 		loadedCountries[1].innerHTML = config.loadedValue
@@ -191,7 +192,7 @@ const findBdc = (obj) => {
 		Object.values(obj).map((myCca3) => {
 			config.apiResponse.filter((el) => {
 				if (el.cca3 == myCca3) {
-					res.push(idiomName(el))
+					res.push(el)
 				}
 			})
 		})
@@ -202,11 +203,14 @@ const findBdc = (obj) => {
 	return res
 }
 
-const boxInfo = (obj) => {
+const boxInfo = (obj, chageBoolean) => {
+	if (chageBoolean == true) {
+		changeInputs()
+	}
+
 	let className = "countryInfo"
 	container.innerHTML = ""
 	config.loadedValue = 1
-	changeInputs()
 	handleDrawBox(obj, className)
 }
 
