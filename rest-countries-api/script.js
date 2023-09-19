@@ -96,6 +96,7 @@ const handleDrawBox = (country, className) => {
 
 	const flag = document.createElement("img")
 	flag.src = country.flags.png
+	flag.alt = name
 	mainDiv.appendChild(flag)
 
 	const textArea = document.createElement("div")
