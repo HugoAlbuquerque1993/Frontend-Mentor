@@ -21,8 +21,7 @@ const config = {
 			bdc: "Border Countries",
 
 			title: "Where's in the world?",
-			moon: "Dark Mode",
-			sun: "Light Mode",
+			moon: ["Dark Mode", "Light Mode"],
 			back: "Back",
 			search: "Search for a country...",
 			filter: "Filter by Region",
@@ -33,15 +32,14 @@ const config = {
 			reg: "Região",
 			cap: "Capital",
 			nat: "Nome Nativo",
-			sub: "Sub Região",
+			sub: "Sub-Região",
 			TLD: "Domínio de Nível Superior",
-			cur: "Currencies",
-			lng: "Linguas",
+			cur: "Moedas",
+			lng: "Línguas",
 			bdc: "Paises Fronteiriços",
 
 			title: "Onde está no mundo?",
-			moon: "Modo Escuro",
-			sun: "Modo Claro",
+			moon: ["Modo Escuro", "Modo Claro"],
 			back: "Voltar",
 			search: "Procure por um país...",
 			filter: "Filtrar por Região",
@@ -295,19 +293,21 @@ const mainTitle = document.querySelector("#mainTitle")
 const changeMode = document.querySelector(".changeMode")
 const backBtn = document.querySelector("#backBtn")
 const filterDefault = document.querySelector("#filterDefault")
+let sunMoon = "fa-moon"
 
 const handleChangeTranslate = (evt) => {
 	if (evt.target.type == "radio") {
 		let radioValue = evt.target.value
 		let selIdi = (config.selectedIdiom = radioValue)
 		let phrase = config.idiom[`${selIdi}`]
+		let sel = sunMoon == "fa-moon" ? 0 : 1
 
 		mainTitle.innerHTML = phrase.title
-		changeMode.innerText = phrase.moon
-		backBtn.innerText = phrase.back
+		changeMode.innerHTML = `<i class="fa-regular ${sunMoon} fa-spin"></i>${phrase.moon[sel]}`
+		backBtn.innerHTML = `<i class="fa-solid fa-backward fa-beat-fade"></i> ${phrase.back}`
 		searchBar.setAttribute("placeholder", phrase.search)
 		loadedCountries[0].innerHTML = phrase.display
-		filterDefault.innerText = phrase.filter
+		filterDefault.innerHTML = phrase.filter
 
 		container.innerHTML = ""
 		searchBar.value = ""
@@ -317,42 +317,32 @@ const handleChangeTranslate = (evt) => {
 }
 chooseRadio.forEach((el) => addEventListener("click", handleChangeTranslate))
 
-//Change Dark Mode
+let switchPallete = true
+const colorPallete = ["#ffffff", "#2b3945", "#314354", "#111517", "#fafafa", "#fafafa"]
+
 const handleChangeMode = () => {
-	const myText = `
-	:root { 
-		--darkBlueEl: #2b3945;
-		--veryDarkBlueBg: #202c37; 
-		--veryDarkBlueTxt: #111517; 
-		--darkGrayInp: #858585; 
-		--veryLightGrayBg: #fafafa; 
-		--myWhite: #ffffff; }
-	`
-	const altText = `
-	:root {
-		--darkBlueEl: #555;
-		--veryDarkBlueBg: #555; 
-		--veryDarkBlueTxt: #555; 
-		--darkGrayInp: #555; 
-		--veryLightGrayBg: #555; 
-		--myWhite: #555; }
-	`
-	// console.log(document.styleSheets[0])
-	const cssEl = document.querySelector("#cssEl")
-	console.log(cssEl.computedStyleMap())
-	// console.log(rules)
-	// const keys = []
+	sunMoon == "fa-moon" ? (sunMoon = "fa-sun") : (sunMoon = "fa-moon")
+	let sel = sunMoon == "fa-moon" ? 0 : 1
+	changeMode.innerHTML = '<i class="fa-regular ' + sunMoon + ' fa-spin"></i>' + config.idiom[`${config.selectedIdiom}`].moon[sel]
 
-	// const computed = getComputedStyle(document.documentElement)
-	// const values = []
+	const rules = document.styleSheets[0].cssRules[1].style
+	const keys = []
 
-	// for(let i = 0; i < 6; i++) {
-	// 	keys.push(rules[i])
-	// 	// console.log(rules[i])
-	// 	values.push(computed.getPropertyValue(rules[i]))
-	// }
+	for (let i = 0; i < 6; i++) {
+		keys.push(rules[i])
+	}
 
-	// console.log(keys, values)
+	let k = 0
+	for (let i = 0; i < keys.length; i++) {
+		k = i
+
+		switchPallete && (k = i + 3)
+		k >= keys.length && (k -= 6)
+
+		document.documentElement.style.setProperty(keys[i], colorPallete[k])
+	}
+
+	return (switchPallete = !switchPallete)
 }
 changeMode.addEventListener("click", handleChangeMode)
 
@@ -364,3 +354,7 @@ changeMode.addEventListener("click", handleChangeMode)
 
 // define a variável no estilo inline
 // element.style.setProperty("--my-var", jsVar + 4);
+
+// const computed = getComputedStyle(document.documentElement)
+// const values = []
+// values.push(computed.getPropertyValue(rules[i]))
