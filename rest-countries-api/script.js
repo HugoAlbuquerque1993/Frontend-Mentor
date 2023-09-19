@@ -1,6 +1,6 @@
 const config = {
 	apiUrl: "https://restcountries.com/v3.1/all",
-	initLoad: 12,
+	initLoad: 250,
 	loadedValue: 0,
 	apiResponse: [],
 	regList: [],
