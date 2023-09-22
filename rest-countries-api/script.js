@@ -25,6 +25,8 @@ const config = {
 			back: "Back",
 			search: "Search for a country...",
 			filter: "Filter by Region",
+
+			warn: "Impossible read information about: ",
 		},
 		por: {
 			display: "Países Carregados",
@@ -43,6 +45,8 @@ const config = {
 			back: "Voltar",
 			search: "Procure por um país...",
 			filter: "Filtrar por Região",
+
+			warn: "Impossível ler informações sobre: ",
 		},
 	},
 }
@@ -88,6 +92,22 @@ const mainLoad = (resp) => {
 }
 
 const handleDrawBox = (country, className) => {
+	if (typeof country == "string") {
+		console.warn(country)
+		return alert(config.idiom[`${config.selectedIdiom}`].warn + country)
+	}
+
+	let abbr = country.name.nativeName ? findNativeName(country.name.nativeName) : "There's no abreviation avaiable"
+	let nat = abbr == "There's no abreviation avaiable" ? "There's no nat avaiable" : country.name.nativeName[abbr].official
+	let subRegion = country.subregion
+	let currencies = findCurrencies(country.currencies)
+	let languages = findLanguages(country.languages)
+	let bdcArray = findBdc(country.borders)
+	let capital = country.capital || "Capital info is not avaiable."
+	let tld = country.tld[0]
+	let population = country.population
+	let region = country.region
+
 	const infoList = config.idiom[`${config.selectedIdiom}`]
 	const name = idiomName(country)
 
@@ -113,27 +133,20 @@ const handleDrawBox = (country, className) => {
 		mainDiv.classList.add(className)
 		mainDiv.classList.remove("box")
 
-		let abbr = findNativeName(country.name.nativeName)
-		let lang = country.name.nativeName[abbr].official
-		let subRegion = country.subregion
-		let currencies = findCurrencies(country.currencies)
-		let languages = findLanguages(country.languages)
-		let bdcArray = findBdc(country.borders)
-
 		textArea.innerHTML = `
 			<h3>${name}</h3>
 
 			<div class="middleDiv">
 				<div class="infoLeft">
-					<p><strong> ${infoList.nat}: </strong> ${lang} </p>
-					<p><strong> ${infoList.pop}: </strong> ${country.population} </p>
-					<p><strong> ${infoList.reg}: </strong> ${country.region} </p>
+					<p><strong> ${infoList.nat}: </strong> ${nat} </p>
+					<p><strong> ${infoList.pop}: </strong> ${population} </p>
+					<p><strong> ${infoList.reg}: </strong> ${region} </p>
 					<p><strong> ${infoList.sub}: </strong> ${subRegion} </p>
-					<p><strong> ${infoList.cap}: </strong> ${country.capital[0]} </p>
+					<p><strong> ${infoList.cap}: </strong> ${capital} </p>
 				</div>
 					
 				<div class="infoRight">
-					<p><strong> ${infoList.TLD}: </strong> ${country.tld[0]} </p>
+					<p><strong> ${infoList.TLD}: </strong> ${tld} </p>
 					<p><strong> ${infoList.lng}: </strong> ${languages} </p>
 					<p><strong> ${infoList.cur}: </strong> ${currencies} </p>
 				</div>
@@ -175,12 +188,19 @@ const findNativeName = (obj) => {
 }
 
 const findCurrencies = (obj) => {
+	if (obj == undefined) {
+		return "Currencies info is not avaiable."
+	}
+
 	return Object.entries(obj)
 		.map((el) => el[1].name)
 		.join(", ")
 }
 
 const findLanguages = (obj) => {
+	if (typeof obj == "undefined") {
+		return ["Erro aqui"]
+	}
 	return Object.entries(obj)
 		.map((el) => el[1])
 		.join(", ")
@@ -204,8 +224,8 @@ const findBdc = (obj) => {
 	return res
 }
 
-const boxInfo = (obj, chageBoolean) => {
-	if (chageBoolean == true) {
+const boxInfo = (obj, changeDisplaiedInputs) => {
+	if (changeDisplaiedInputs == true) {
 		changeInputs()
 	}
 
