@@ -110,6 +110,7 @@ const handleDrawBox = (country, className) => {
 	mainDiv.appendChild(textArea)
 
 	if (className) {
+		console.log(country)
 		mainDiv.classList.add(className)
 		mainDiv.classList.remove("box")
 
@@ -224,7 +225,11 @@ const changeInputs = () => {
 }
 
 const idiomName = (obj) => {
-	return String(config.selectedIdiom == "eng" ? obj.name.common : obj.translations[`${config.selectedIdiom}`].common)
+	if(typeof obj == "string") {
+		return obj
+	} else {
+		return String(config.selectedIdiom == "eng" ? obj.name.common : obj.translations[`${config.selectedIdiom}`].common)
+	}
 }
 
 //Animation Search Icon & Inputs Functions
