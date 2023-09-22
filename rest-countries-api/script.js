@@ -110,7 +110,6 @@ const handleDrawBox = (country, className) => {
 	mainDiv.appendChild(textArea)
 
 	if (className) {
-		console.log(country)
 		mainDiv.classList.add(className)
 		mainDiv.classList.remove("box")
 
@@ -225,7 +224,7 @@ const changeInputs = () => {
 }
 
 const idiomName = (obj) => {
-	if(typeof obj == "string") {
+	if (typeof obj == "string") {
 		return obj
 	} else {
 		return String(config.selectedIdiom == "eng" ? obj.name.common : obj.translations[`${config.selectedIdiom}`].common)
