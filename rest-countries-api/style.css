@@ -52,11 +52,14 @@ header {
 .changeMode {
 	padding: 10px;
 	border-radius: 10px;
+	border: none;
 	cursor: pointer;
 	transition: 0.5s;
 	color: var(--veryDarkBlueBg);
+	background-color: transparent;
 	overflow: visible;
 	position: relative;
+	display: flex;
 }
 .changeMode:hover {
 	background-color: var(--veryDarkBlueBg);

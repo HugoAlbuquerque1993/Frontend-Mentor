@@ -1,114 +1,114 @@
-const config = {
+let config = {
 	apiUrl: "https://restcountries.com/v3.1/all",
 	initLoad: 250,
 	loadedValue: 0,
-	apiResponse: [],
 	regList: [],
 	selectedRegion: "null",
 	selectedIdiom: "eng",
+	sunMoonIcon: "fa-moon",
+}
 
-	idiom: {
-		eng: {
-			display: "Loaded Countries",
-			pop: "Population",
-			reg: "Region",
-			cap: "Capital",
-			nat: "Native Name",
-			sub: "Sub Region",
-			TLD: "Top Level Domain",
-			cur: "Currencies",
-			lng: "Languages",
-			bdc: "Border Countries",
+const idiom = {
+	eng: {
+		display: "Loaded Countries",
+		pop: "Population",
+		reg: "Region",
+		cap: "Capital",
+		nat: "Native Name",
+		sub: "Sub Region",
+		TLD: "Top Level Domain",
+		cur: "Currencies",
+		lng: "Languages",
+		bdc: "Border Countries",
 
-			title: "Where's in the world?",
-			moon: ["Dark Mode", "Light Mode"],
-			back: "Back",
-			search: "Search for a country...",
-			filter: "Filter by Region",
+		title: "Where's in the world?",
+		moon: ["Dark Mode", "Light Mode"],
+		back: "Back",
+		search: "Search for a country...",
+		filter: "Filter by Region",
 
-			warn: "Impossible read information about: ",
-		},
-		por: {
-			display: "Países Carregados",
-			pop: "População",
-			reg: "Região",
-			cap: "Capital",
-			nat: "Nome Nativo",
-			sub: "Sub-Região",
-			TLD: "Domínio de Nível Superior",
-			cur: "Moedas",
-			lng: "Línguas",
-			bdc: "Paises Fronteiriços",
+		warn: "Impossible read information about: ",
+	},
+	por: {
+		display: "Países Carregados",
+		pop: "População",
+		reg: "Região",
+		cap: "Capital",
+		nat: "Nome Nativo",
+		sub: "Sub-Região",
+		TLD: "Domínio de Nível Superior",
+		cur: "Moedas",
+		lng: "Línguas",
+		bdc: "Paises Fronteiriços",
 
-			title: "Onde está no mundo?",
-			moon: ["Modo Escuro", "Modo Claro"],
-			back: "Voltar",
-			search: "Procure por um país...",
-			filter: "Filtrar por Região",
+		title: "Onde está no mundo?",
+		moon: ["Modo Escuro", "Modo Claro"],
+		back: "Voltar",
+		search: "Procure por um país...",
+		filter: "Filtrar por Região",
 
-			warn: "Impossível ler informações sobre: ",
-		},
+		warn: "Impossível ler informações sobre: ",
 	},
 }
 
 const containerSection = document.querySelector(".containerSection")
 const container = document.querySelector(".container")
+const searchIcon = document.querySelector("#searchIcon")
+const searchBar = document.querySelector("#searchBar")
+const loadedCountries = [...document.querySelectorAll(".loadedCountries > *")]
+
+const handleStart = () => {
+	if (apiResponse.name == "TypeError") {
+		errorOnFetch(apiResponse)
+	} else {
+		mainLoad(apiResponse)
+	}
+}
 
 const handleFetch = async () => {
 	const apiJson = await fetch(config.apiUrl)
 		.then((res) => res.json())
 		.catch((err) => err)
 
-	if (apiJson.name == "TypeError") {
-		errorToFetch(apiJson)
+	return apiJson
+}
+
+let apiResponse = await handleFetch()
+
+let fetchError = false
+const errorOnFetch = (err) => {
+	if (fetchError != false) {
+		console.log("Error already execute")
 	} else {
-		mainLoad(apiJson)
-	}
+		fetchError = true
+		const errorImage = document.createElement("img")
+		errorImage.classList.add("errorImage")
+		errorImage.src = "./img/error404.png"
 
-	config.apiResponse = apiJson
-}
-handleFetch()
+		containerSection.removeChild(container)
+		containerSection.appendChild(errorImage)
 
-const errorToFetch = (err) => {
-	const errorImage = document.createElement("img")
-	errorImage.classList.add("errorImage")
-	errorImage.src = "./img/error404.png"
-
-	containerSection.removeChild(container)
-	containerSection.appendChild(errorImage)
-
-	console.table(err)
-}
-
-const mainLoad = (resp) => {
-	const filtered = resp
-	config.loadedValue = 0
-	container.innerHTML = ""
-	searchBar.value = ""
-
-	for (let i = 0; i < config.initLoad; i++) {
-		handleDrawBox(filtered[i])
+		console.table(err)
 	}
 }
 
 const handleDrawBox = (country, className) => {
 	if (typeof country == "string") {
 		console.warn(country)
-		return alert(config.idiom[`${config.selectedIdiom}`].warn + country)
+		return alert(idiom[`${config.selectedIdiom}`].warn + country)
 	}
 
-	let abbr = country.name.nativeName ? findNativeName(country.name.nativeName) : "There's no abreviation avaiable"
+	let abbr = findAbbr(country)
 	let nat = abbr == "There's no abreviation avaiable" ? "There's no nat avaiable" : country.name.nativeName[abbr].official
-	let subRegion = country.subregion
-	let currencies = findCurrencies(country.currencies)
-	let languages = findLanguages(country.languages)
-	let bdcArray = findBdc(country.borders)
-	let capital = country.capital || "Capital info is not avaiable."
-	let tld = country.tld[0]
+	let subRegion = findSubregion(country)
+	let currencies = findCurrencies(country)
+	let languages = findLanguages(country)
+	let bdcArray = findBdc(country)
+	let capital = country.capital ? country.capital : "Capital info is not avaiable."
+	let tld = findTld(country)
 	let population = country.population
 	let region = country.region
-
-	const infoList = config.idiom[`${config.selectedIdiom}`]
+	const infoList = idiom[`${config.selectedIdiom}`]
 	const name = idiomName(country)
 
 	const mainDiv = document.createElement("div")
@@ -116,17 +116,17 @@ const handleDrawBox = (country, className) => {
 
 	const flag = document.createElement("img")
 	flag.src = country.flags.png
-	flag.alt = name
+	flag.alt = name + " flag"
 	mainDiv.appendChild(flag)
 
 	const textArea = document.createElement("div")
 	textArea.classList.add("textArea")
 	textArea.innerHTML = `
-		<h3>${name}</h3>
-		<p><strong>${infoList.pop}: </strong>${country.population}</p>
-		<p><strong>${infoList.reg}: </strong>${country.region}</p>
-		<p><strong>${infoList.cap}: </strong>${country.capital}</p>
-    `
+		  <h3>${name}</h3>
+		  <p><strong>${infoList.pop}: </strong>${country.population}</p>
+		  <p><strong>${infoList.reg}: </strong>${country.region}</p>
+		  <p><strong>${infoList.cap}: </strong>${country.capital}</p>
+	  `
 	mainDiv.appendChild(textArea)
 
 	if (className) {
@@ -134,24 +134,24 @@ const handleDrawBox = (country, className) => {
 		mainDiv.classList.remove("box")
 
 		textArea.innerHTML = `
-			<h3>${name}</h3>
-
-			<div class="middleDiv">
-				<div class="infoLeft">
-					<p><strong> ${infoList.nat}: </strong> ${nat} </p>
-					<p><strong> ${infoList.pop}: </strong> ${population} </p>
-					<p><strong> ${infoList.reg}: </strong> ${region} </p>
-					<p><strong> ${infoList.sub}: </strong> ${subRegion} </p>
-					<p><strong> ${infoList.cap}: </strong> ${capital} </p>
-				</div>
-					
-				<div class="infoRight">
-					<p><strong> ${infoList.TLD}: </strong> ${tld} </p>
-					<p><strong> ${infoList.lng}: </strong> ${languages} </p>
-					<p><strong> ${infoList.cur}: </strong> ${currencies} </p>
-				</div>
-			</div>
-		`
+			  <h3>${name}</h3>
+  
+			  <div class="middleDiv">
+				  <div class="infoLeft">
+					  <p><strong> ${infoList.nat}: </strong> ${nat} </p>
+					  <p><strong> ${infoList.pop}: </strong> ${population} </p>
+					  <p><strong> ${infoList.reg}: </strong> ${region} </p>
+					  <p><strong> ${infoList.sub}: </strong> ${subRegion} </p>
+					  <p><strong> ${infoList.cap}: </strong> ${capital} </p>
+				  </div>
+					  
+				  <div class="infoRight">
+					  <p><strong> ${infoList.TLD}: </strong> ${tld} </p>
+					  <p><strong> ${infoList.lng}: </strong> ${languages} </p>
+					  <p><strong> ${infoList.cur}: </strong> ${currencies} </p>
+				  </div>
+			  </div>
+		  `
 
 		const bdcDiv = document.createElement("div")
 		bdcDiv.classList.add("bdcDiv")
@@ -183,49 +183,111 @@ const handleDrawBox = (country, className) => {
 	}, 125 * config.loadedValue)
 }
 
+const mainLoad = (resp) => {
+	const filtered = resp
+	config.loadedValue = 0
+	container.innerHTML = ""
+	searchBar.value = ""
+
+	for (let i = 0; i < config.initLoad; i++) {
+		handleDrawBox(filtered[i])
+	}
+}
+
 const findNativeName = (obj) => {
 	return String(Object.keys(obj)[0])
 }
 
 const findCurrencies = (obj) => {
-	if (obj == undefined) {
-		return "Currencies info is not avaiable."
+	if (obj) {
+		if (typeof obj.currencies == "undefined") {
+			// console.warn(obj)
+			return obj.name.common + " currencies undefined"
+		} else {
+			return Object.entries(obj.currencies)
+				.map((el) => el[1].name)
+				.join(", ")
+		}
+	} else {
+		console.warn("The object wasn't passed to the method. findCurrencies(obj)" + obj)
+		return "The object wasn't passed to the method. findCurrencies(obj)"
 	}
+}
 
-	return Object.entries(obj)
-		.map((el) => el[1].name)
-		.join(", ")
+const findSubregion = (obj) => {
+	if (obj) {
+		if (typeof obj.subregion != "undefined") {
+			return obj.subregion
+		} else {
+			// console.warn(obj)
+			return "There's no Subregion avaiable. See warning in console!"
+		}
+	} else {
+		console.warn("The object wasn't passed to the method. findCurrencies(obj)" + obj)
+		return "Object wasn't passed."
+	}
 }
 
 const findLanguages = (obj) => {
-	if (typeof obj == "undefined") {
-		return ["Erro aqui"]
+	if (obj) {
+		if (typeof obj.languages != "undefined") {
+			return Object.entries(obj.languages)
+				.map((el) => el[1])
+				.join(", ")
+		} else {
+			// console.warn(obj)
+			return "There's no Languages avaiable. See warning in console!"
+		}
+	} else {
+		console.warn("The object wasn't passed to the method. findCurrencies(obj)" + obj)
+		return ["Object wasn't passed."]
 	}
-	return Object.entries(obj)
-		.map((el) => el[1])
-		.join(", ")
+}
+
+const findAbbr = (obj) => {
+	if (obj) {
+		if (obj.name.nativeName) {
+			return findNativeName(obj.name.nativeName)
+		} else {
+			return "There's no abreviation avaiable"
+		}
+	} else {
+		return "Object wasn't passed."
+	}
+}
+
+const findTld = (obj) => {
+	if (typeof obj.tld == "undefined") {
+		return ["TLD Not Found"]
+	}
+	return obj.tld[0]
 }
 
 const findBdc = (obj) => {
 	let res = []
 
 	if (obj) {
+		if (typeof obj.borders == "undefined") {
+			res = ["N/A"]
+			return res
+		}
+	}
+
+	if (obj) {
 		Object.values(obj).map((myCca3) => {
-			config.apiResponse.filter((el) => {
+			apiResponse.filter((el) => {
 				if (el.cca3 == myCca3) {
 					res.push(el)
 				}
 			})
 		})
-	} else {
-		res = ["N/A"]
 	}
 
 	return res
 }
 
-const boxInfo = (obj, changeDisplaiedInputs) => {
-	if (changeDisplaiedInputs == true) {
+const boxInfo = (obj, changeDisplayedInputs) => {
+	if (changeDisplayedInputs == true) {
 		changeInputs()
 	}
 
@@ -252,15 +314,13 @@ const idiomName = (obj) => {
 }
 
 //Animation Search Icon & Inputs Functions
-const loadedCountries = [...document.querySelectorAll(".loadedCountries > *")]
 document.querySelector("#backBtn").addEventListener("click", () => {
 	changeInputs()
 	containerSection.innerHTML = ""
 	containerSection.appendChild(container)
-	mainLoad(config.apiResponse)
+	mainLoad(apiResponse)
 })
-const searchIcon = document.querySelector("#searchIcon")
-const searchBar = document.querySelector("#searchBar")
+
 searchBar.addEventListener("focus", () => {
 	searchIcon.classList.add("fa-bounce")
 })
@@ -274,19 +334,19 @@ const handleTextFilter = (evt) => {
 	loadedCountries[1].innerHTML = 0
 	config.loadedValue = 0
 
-	if (text == "") return mainLoad(config.apiResponse)
+	if (text == "") return mainLoad(apiResponse)
 
 	if (config.selectedRegion == "null") {
-		config.apiResponse.forEach((el) => {
-			let name = idiomName(el).toLowerCase()
+		apiResponse.forEach((str) => {
+			let name = idiomName(str).toLowerCase()
 
-			if (name.includes(text)) handleDrawBox(el)
+			if (name.includes(text)) handleDrawBox(str)
 		})
 	} else {
-		config.regList.forEach((el) => {
-			let name = idiomName(el).toLowerCase()
+		config.regList.forEach((str) => {
+			let name = idiomName(str).toLowerCase()
 
-			if (name.includes(text)) handleDrawBox(el)
+			if (name.includes(text)) handleDrawBox(str)
 		})
 	}
 }
@@ -300,11 +360,11 @@ const handleRegionFilter = (evt) => {
 	config.loadedValue = 0
 
 	if (config.selectedRegion == "null") {
-		mainLoad(config.apiResponse)
+		mainLoad(apiResponse)
 	} else {
 		config.regList = []
 
-		config.apiResponse.forEach((el) => {
+		apiResponse.forEach((el) => {
 			if (el.region == config.selectedRegion) {
 				config.regList.push(el)
 				handleDrawBox(el)
@@ -322,37 +382,47 @@ const mainTitle = document.querySelector("#mainTitle")
 const changeMode = document.querySelector(".changeMode")
 const backBtn = document.querySelector("#backBtn")
 const filterDefault = document.querySelector("#filterDefault")
-let sunMoon = "fa-moon"
 
 const handleChangeTranslate = (evt) => {
-	if (evt.target.type == "radio") {
-		let radioValue = evt.target.value
-		let selIdi = (config.selectedIdiom = radioValue)
-		let phrase = config.idiom[`${selIdi}`]
-		let sel = sunMoon == "fa-moon" ? 0 : 1
+	chooseRadio[0].previousElementSibling.removeAttribute("checked")
+	chooseRadio[1].previousElementSibling.setAttribute("checked", "checked")
 
-		mainTitle.innerHTML = phrase.title
-		changeMode.innerHTML = `<i class="fa-regular ${sunMoon} fa-spin"></i>${phrase.moon[sel]}`
-		backBtn.innerHTML = `<i class="fa-solid fa-backward fa-beat-fade"></i> ${phrase.back}`
-		searchBar.setAttribute("placeholder", phrase.search)
-		loadedCountries[0].innerHTML = phrase.display
-		filterDefault.innerHTML = phrase.filter
+	let radioValue = evt ? evt.target.previousElementSibling.value : config.selectedIdiom
+	config.selectedIdiom = radioValue
+	console.log(config.selectedIdiom)
+	let phrase = idiom[`${radioValue}`]
+	let sel = config.sunMoonIcon == "fa-moon" ? 0 : 1
 
-		container.innerHTML = ""
-		searchBar.value = ""
+	mainTitle.innerHTML = phrase.title
+	changeMode.innerHTML = `<i class="fa-regular ${config.sunMoonIcon} fa-spin"></i>${phrase.moon[sel]}`
+	backBtn.innerHTML = `<i class="fa-solid fa-backward fa-beat-fade"></i> ${phrase.back}`
+	searchBar.setAttribute("placeholder", phrase.search)
+	loadedCountries[0].innerHTML = phrase.display
+	filterDefault.innerHTML = phrase.filter
 
-		mainLoad(config.apiResponse)
-	}
+	container.innerHTML = ""
+	searchBar.value = ""
+
+	sessionStorage.pref = JSON.stringify(config)
+	handleStart()
 }
-chooseRadio.forEach((el) => addEventListener("click", handleChangeTranslate))
+chooseRadio.forEach((el) => el.addEventListener("click", handleChangeTranslate))
 
-let switchPallete = true
 const colorPallete = ["#ffffff", "#2b3945", "#314354", "#111517", "#fafafa", "#fafafa"]
+const handleChangeMode = (evt) => {
+	console.log(config)
+	let switchPallete = config.sunMoonIcon != "fa-sun" ? true : false
 
-const handleChangeMode = () => {
-	sunMoon == "fa-moon" ? (sunMoon = "fa-sun") : (sunMoon = "fa-moon")
-	let sel = sunMoon == "fa-moon" ? 0 : 1
-	changeMode.innerHTML = '<i class="fa-regular ' + sunMoon + ' fa-spin"></i>' + config.idiom[`${config.selectedIdiom}`].moon[sel]
+	if (evt) {
+		config.sunMoonIcon = config.sunMoonIcon == "fa-moon" ? "fa-sun" : "fa-moon"
+		evt.target.setAttribute("disabled", "disabled")
+		setTimeout(() => {
+			evt.target.removeAttribute("disabled")
+		}, 2000)
+	}
+
+	let sel = config.sunMoonIcon == "fa-moon" ? 0 : 1
+	changeMode.innerHTML = '<i class="fa-regular ' + config.sunMoonIcon + ' fa-spin"></i>' + idiom[`${config.selectedIdiom}`].moon[sel]
 
 	const rules = document.styleSheets[0].cssRules[1].style
 	const keys = []
@@ -361,9 +431,8 @@ const handleChangeMode = () => {
 		keys.push(rules[i])
 	}
 
-	let k = 0
 	for (let i = 0; i < keys.length; i++) {
-		k = i
+		let k = i
 
 		switchPallete && (k = i + 3)
 		k >= keys.length && (k -= 6)
@@ -371,19 +440,24 @@ const handleChangeMode = () => {
 		document.documentElement.style.setProperty(keys[i], colorPallete[k])
 	}
 
-	return (switchPallete = !switchPallete)
+	switchPallete = config.sunMoonIcon != "fa-sun" ? true : false
+	sessionStorage.pref = JSON.stringify(config)
+	console.log(config)
 }
 changeMode.addEventListener("click", handleChangeMode)
 
-// obtém a variável do estilo inline
-// element.style.getPropertyValue("--my-var");
-
-// obtém variável de qualquer lugar
-// getComputedStyle(element).getPropertyValue("--my-var")
-
-// define a variável no estilo inline
-// element.style.setProperty("--my-var", jsVar + 4);
-
-// const computed = getComputedStyle(document.documentElement)
-// const values = []
-// values.push(computed.getPropertyValue(rules[i]))
+// Keep preferences - Flow Script
+if (!sessionStorage.pref) {
+	sessionStorage.pref = JSON.stringify(config)
+	handleStart()
+} else {
+	config = JSON.parse(sessionStorage.pref)
+	if (config.sunMoonIcon == "fa-sun") {
+		handleChangeMode()
+	}
+	if (config.selectedIdiom == "por") {
+		handleChangeTranslate()
+	} else {
+		handleStart()
+	}
+}
