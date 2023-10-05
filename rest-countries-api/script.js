@@ -269,24 +269,22 @@ const findBdc = (obj) => {
 	if (obj) {
 		if (typeof obj.borders == "undefined") {
 			res = ["N/A"]
-			return res
-		}
-	}
-
-	if (obj) {
-		Object.values(obj).map((myCca3) => {
-			apiResponse.filter((el) => {
-				if (el.cca3 == myCca3) {
-					res.push(el)
-				}
+		} else {
+			Object.values(obj.borders).map((myCca3) => {
+				apiResponse.filter((el) => {
+					if (el.cca3 == myCca3) {
+						res.push(el)
+					}
+				})
 			})
-		})
+		}
 	}
 
 	return res
 }
 
 const boxInfo = (obj, changeDisplayedInputs) => {
+	console.log(obj)
 	if (changeDisplayedInputs == true) {
 		changeInputs()
 	}
