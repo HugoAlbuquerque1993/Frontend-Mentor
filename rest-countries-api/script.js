@@ -401,7 +401,6 @@ const handleChangeTranslate = (evt) => {
 	container.innerHTML = ""
 	searchBar.value = ""
 
-	sessionStorage.pref = JSON.stringify(config)
 	handleStart()
 }
 chooseRadio.forEach((el) => el.addEventListener("click", handleChangeTranslate))
@@ -439,23 +438,8 @@ const handleChangeMode = (evt) => {
 	}
 
 	switchPallete = config.sunMoonIcon != "fa-sun" ? true : false
-	sessionStorage.pref = JSON.stringify(config)
 	console.log(config)
 }
 changeMode.addEventListener("click", handleChangeMode)
 
-// Keep preferences - Flow Script
-if (!sessionStorage.pref) {
-	sessionStorage.pref = JSON.stringify(config)
-	handleStart()
-} else {
-	config = JSON.parse(sessionStorage.pref)
-	if (config.sunMoonIcon == "fa-sun") {
-		handleChangeMode()
-	}
-	if (config.selectedIdiom == "por") {
-		handleChangeTranslate()
-	} else {
-		handleStart()
-	}
-}
+handleStart()
