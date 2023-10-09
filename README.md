@@ -22,4 +22,4 @@
 
 ## Difficulty 5: Guru</h3>
 
-1. Comming soob (or not) ='D
+1. Coming soon (or not) ='D
