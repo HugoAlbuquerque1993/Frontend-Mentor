@@ -2,7 +2,7 @@
 
 ![Design preview for the REST Countries API with color theme switcher coding challenge](./design/desktop-preview.jpg)
 
-Click to go to the [Live Site](https://hugoalbuquerque1993.github.io/Frontend-Mentor/rest-countries-api/index.html)
+Open the Live Site [here](https://hugoalbuquerque1993.github.io/Frontend-Mentor/rest-countries-api/index.html)
 
 ## Welcome! 👋
 
