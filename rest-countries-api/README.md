@@ -16,9 +16,9 @@ I am proud of the results achieved and happy with the new features implemented. 
 ### Português:
 Gostaria de destacar a implementação de duas novas funcionalidades. A primeira é a adição de um tradutor para meu idioma nativo, o Português do Brasil (Pt-Br). A segunda é a capacidade de visualizar a quantidade de países carregados no filtro de pesquisa atual.
 
-Embora essas funcionalidades não fossem parte do desafio original, decidi incluí-las para aprimorar a aplicação e deixar minha contribuição pessoal. Infelizmente precisaria de bastante tempo para revisar o código e garantir sua manutenibilidade e escalabilidade. Mas como desafio em si  foi concluído com sucesso e o APP não evoluirá a partir desse ponto que se encontra, não será necessário revisar o código.
+Embora essas funcionalidades não fossem parte do desafio original, decidi incluí-las para aprimorar a aplicação e deixar minha contribuição pessoal. Infelizmente precisaria de bastante tempo para revisar o código e garantir sua manutenibilidade e escalabilidade. Mas como o desafio em si foi concluído com sucesso e o APP não evoluirá a partir desse ponto que se encontra, não será necessário revisar o código.
 
-Estou orgulhoso do resultado alcançado e  feliz com as novas funcionalidades implementadas. Espero um dia poder trabalhar em projetos grandioso, continuar aprendendo e sempre dando o meu melhor.
+Estou orgulhoso do resultado alcançado e feliz com as novas funcionalidades implementadas. Espero um dia poder trabalhar em projetos grandioso, continuar aprendendo e sempre dando o meu melhor.
 
 # Below is the readme of the challenge
 
