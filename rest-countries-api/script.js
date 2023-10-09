@@ -312,6 +312,14 @@ const idiomName = (obj) => {
 }
 
 //Animation Search Icon & Inputs Functions
+const linkGithubBtn = document.querySelector(".linkGithubBtn")
+const faGithub = document.querySelector(".fa-github")
+linkGithubBtn.addEventListener("mouseover", () => {
+	if(!faGithub.classList.contains("fa-flip")) faGithub.classList.add("fa-flip")
+})
+linkGithubBtn.addEventListener("mouseout", () => {
+	if(faGithub.classList.contains("fa-flip")) faGithub.classList.remove("fa-flip")
+})
 document.querySelector("#backBtn").addEventListener("click", () => {
 	changeInputs()
 	containerSection.innerHTML = ""

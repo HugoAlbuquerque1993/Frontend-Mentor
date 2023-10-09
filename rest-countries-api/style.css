@@ -34,7 +34,7 @@ body {
 	flex-direction: column;
 }
 i {
-	margin-right: 5px;
+	margin-right: 8px;
 	color: var(--veryDarkBlueTxt);
 }
 
@@ -48,6 +48,33 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	padding: 20px 5vw;
+}
+.headerConfig {
+	display: flex;
+	gap: 10px;
+}
+.linkGithubBtn {
+	display: grid;
+	place-items: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	cursor: pointer;
+	position: relative;
+	transition: .2s;
+	background-color: var(--veryLightGrayBg);
+}
+.linkGithubBtn i {
+	color: var(--darkBlueEl);
+	margin: 0;
+}
+.linkGithubBtn:hover {
+	transform: scale(1.1);
+}
+@media (max-width: 420px) {
+	.linkGithubBtn {
+		display: none;
+	}
 }
 .changeMode {
 	padding: 10px;

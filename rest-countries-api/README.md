@@ -4,6 +4,24 @@ Open the [Live Site](https://hugoalbuquerque1993.github.io/Frontend-Mentor/rest-
 
 ![Design preview for the REST Countries API with color theme switcher coding challenge](./design/desktop-preview.jpg)
 
+## ATTENTION! Hugo here!
+
+### English:
+I would like to highlight the implementation of two new features. The first one is the addition of a translator for my native language, Brazilian Portuguese (Pt-Br). The second is the ability to view the number of countries loaded in the current search filter.
+
+Although these features were not part of the original challenge, I decided to include them to enhance the application and make my personal contribution. Unfortunately, it would require a significant amount of time to review the code and ensure its maintainability and scalability. However, since the challenge itself has been successfully completed, and the app will not evolve beyond its current state, there is no need to review the code.
+
+I am proud of the results achieved and happy with the new features implemented. I hope to one day work on larger projects, continue learning, and always give my best.
+
+### Português:
+Gostaria de destacar a implementação de duas novas funcionalidades. A primeira é a adição de um tradutor para meu idioma nativo, o Português do Brasil (Pt-Br). A segunda é a capacidade de visualizar a quantidade de países carregados no filtro de pesquisa atual.
+
+Embora essas funcionalidades não fossem parte do desafio original, decidi incluí-las para aprimorar a aplicação e deixar minha contribuição pessoal. Infelizmente precisaria de bastante tempo para revisar o código e garantir sua manutenibilidade e escalabilidade. Mas como desafio em si  foi concluído com sucesso e o APP não evoluirá a partir desse ponto que se encontra, não será necessário revisar o código.
+
+Estou orgulhoso do resultado alcançado e  feliz com as novas funcionalidades implementadas. Espero um dia poder trabalhar em projetos grandioso, continuar aprendendo e sempre dando o meu melhor.
+
+# Below is the readme of the challenge
+
 ## Welcome! 👋
 
 Thanks for checking out this front-end coding challenge.
