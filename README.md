@@ -4,21 +4,21 @@
 
 1. [QR Code](https://hugoalbuquerque1993.github.io/Frontend-Mentor/qr-code-component-main/index.html)
 
-2. <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/interactive-rating-component-main/index.html">Interactive Rating</a>
+2. [Interactive Rating](https://hugoalbuquerque1993.github.io/Frontend-Mentor/interactive-rating-component-main/index.html)
 
 ## Difficulty 2: Junior
 
-1. <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/age-calculator-app-main/index.html">Age Calculator</a>
+1. [Age Calculator](https://hugoalbuquerque1993.github.io/Frontend-Mentor/age-calculator-app-main/index.html)
 
 ## Difficulty 3: Intermediate
 
-1. <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/launch-countdown-timer-main/index.html">Countdown Timer</a>
+1. [Countdown Timer](https://hugoalbuquerque1993.github.io/Frontend-Mentor/launch-countdown-timer-main/index.html)
 
-2. <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/ip-address-tracker-master/index.html">IP Address Tracker</a>
+2. [IP Address Tracker](https://hugoalbuquerque1993.github.io/Frontend-Mentor/ip-address-tracker-master/index.html)
 
 ## Difficulty 4: Advanced
 
-1. <a href="https://hugoalbuquerque1993.github.io/Frontend-Mentor/rest-countries-api/index.html">Rest Countries API</a>
+1. [Rest Countries API](https://hugoalbuquerque1993.github.io/Frontend-Mentor/rest-countries-api/index.html)
 
 ## Difficulty 5: Guru</h3>
 
