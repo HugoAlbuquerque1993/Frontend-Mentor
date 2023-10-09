@@ -4,7 +4,7 @@ Open the [Live Site](https://hugoalbuquerque1993.github.io/Frontend-Mentor/rest-
 
 ![Design preview for the REST Countries API with color theme switcher coding challenge](./design/desktop-preview.jpg)
 
-## ATTENTION! Hugo here!
+## ATTENTION - HUGO HERE!
 
 ### English:
 I would like to highlight the implementation of two new features. The first one is the addition of a translator for my native language, Brazilian Portuguese (Pt-Br). The second is the ability to view the number of countries loaded in the current search filter.
