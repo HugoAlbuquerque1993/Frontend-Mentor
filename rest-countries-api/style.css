@@ -61,7 +61,7 @@ header {
 	border-radius: 50%;
 	cursor: pointer;
 	position: relative;
-	transition: .2s;
+	transition: 0.2s;
 	background-color: var(--veryLightGrayBg);
 }
 .linkGithubBtn i {
@@ -199,7 +199,7 @@ header {
 }
 .box img {
 	width: 100%;
-	height: clamp(150px, 45%, 200px);
+	height: clamp(150px, 15vw, 180px);
 }
 .box > div {
 	margin: 10px 15px;
