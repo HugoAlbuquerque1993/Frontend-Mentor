@@ -2,7 +2,7 @@
 
 Open the [Live Site](https://hugoalbuquerque1993.github.io/Frontend-Mentor/rest-countries-api/index.html).
 
-Open my [page for this challenge](https://www.frontendmentor.io/solutions/new-features-how-switch-language-to-portguese-and-more-v0s5JSVlL1) on FrontEnd Menthor.
+Open my [page for this challenge](https://www.frontendmentor.io/solutions/new-features-how-switch-language-to-portguese-and-more-v0s5JSVlL1) in FrontEnd Menthor.
 
 ![Design preview for the REST Countries API with color theme switcher coding challenge](./design/desktop-preview.jpg)
 
