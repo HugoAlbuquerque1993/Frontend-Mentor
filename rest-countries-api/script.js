@@ -6,6 +6,7 @@ let config = {
 	selectedRegion: "null",
 	selectedIdiom: "eng",
 	sunMoonIcon: "fa-moon",
+	countryShown: undefined,
 }
 
 const idiom = {
@@ -28,6 +29,17 @@ const idiom = {
 		filter: "Filter by Region",
 
 		warn: "Impossible read information about: ",
+		knowMoreBtnTxt: "Know More About",
+		notWorkingBtnTxt: "Not working?",
+		notWorkingContentTxt: `
+			<h2> Page not found? </h2>
+			<p> - The button on the right opens an external page that shows historical information about the country. Did you click the button on the right and, after the new tab opened, the page didn't find the country you were searching for? In some cases the external page will not find the country, this may happen because </p>
+			<ul>
+				<li> The external page may not have information about the specified country; </li>
+				<li> The external page shows the original country name differently from the name provided by the API; </li>
+				<li> The external page presents specific information in a grouped form; </li>
+			</ul>
+		`,
 	},
 	por: {
 		display: "Países Carregados",
@@ -48,6 +60,17 @@ const idiom = {
 		filter: "Filtrar por Região",
 
 		warn: "Impossível ler informações sobre: ",
+		knowMoreBtnTxt: "Conheça Mais Sobre",
+		notWorkingBtnTxt: "Não funciona?",
+		notWorkingContentTxt: `
+			<h2> Página não encontrada? </h2>
+			<p> - O botão a direita abre uma página externa que mostra informações históricas sobre o país. Você clicou no botão à direita e, após a nova guia abrir, a página não encontrou o país que você estava pesquisando? Em alguns casos a página externa não encontrará o país, isso pode acontencer por alguns fatores: </p>
+			<ul>
+				<li> A página externa pode não ter informações sobre o país expecificado; </li>
+				<li> A página externa mostra o nome do país original de forma diferente do nome fornecido pela API; </li>
+				<li> A página externa apresenta informações específicas de forma agrupada; </li>
+			</ul>
+		`,
 	},
 }
 
@@ -93,9 +116,9 @@ const errorOnFetch = (err) => {
 }
 
 const handleDrawBox = (country, className) => {
-	if (typeof country == "string") {
+	if (typeof country != "object") {
 		console.warn(country)
-		return alert(idiom[`${config.selectedIdiom}`].warn + country)
+		return console.log(idiom[`${config.selectedIdiom}`].warn + country)
 	}
 
 	let abbr = findAbbr(country)
@@ -108,8 +131,8 @@ const handleDrawBox = (country, className) => {
 	let tld = findTld(country)
 	let population = country.population
 	let region = country.region
-	const infoList = idiom[`${config.selectedIdiom}`]
-	const name = idiomName(country)
+	let infoList = idiom[`${config.selectedIdiom}`]
+	let name = idiomName(country)
 
 	const mainDiv = document.createElement("div")
 	mainDiv.classList.add("box")
@@ -284,7 +307,11 @@ const findBdc = (obj) => {
 }
 
 const boxInfo = (obj, changeDisplayedInputs) => {
-	console.log(obj)
+	if (typeof obj != "object") {
+		console.warn(obj)
+		return console.log(idiom[`${config.selectedIdiom}`].warn + obj)
+	}
+
 	if (changeDisplayedInputs == true) {
 		changeInputs()
 	}
@@ -292,6 +319,7 @@ const boxInfo = (obj, changeDisplayedInputs) => {
 	let className = "countryInfo"
 	container.innerHTML = ""
 	config.loadedValue = 1
+	config.countryShown = obj
 	handleDrawBox(obj, className)
 }
 
@@ -311,16 +339,61 @@ const idiomName = (obj) => {
 	}
 }
 
+//External content
+const knowMoreBtn = document.querySelector("#knowMoreBtn")
+const notWorkingBtn = document.querySelector("#notWorkingBtn")
+
+const notWorkingFunc = () => {
+	let exitDiv = document.createElement("div")
+	exitDiv.classList.add("exitDiv")
+
+	exitDiv.addEventListener("click", (e) => {
+		if (e.target.className == "exitDiv") {
+			exitDiv.style.opacity = 0
+
+			setTimeout(() => {
+				document.body.removeChild(exitDiv)
+			}, 10)
+		}
+	})
+	document.body.appendChild(exitDiv)
+	setTimeout(() => {
+		exitDiv.style.opacity = 1
+	}, 10)
+
+	let notWorkingContent = document.createElement("div")
+	notWorkingContent.classList.add("notWorkingContent")
+
+	notWorkingContent.innerHTML = idiom[config.selectedIdiom].notWorkingContentTxt
+
+	exitDiv.appendChild(notWorkingContent)
+}
+
+notWorkingBtn.addEventListener("click", notWorkingFunc)
+const knowMoreAbout = () => {
+	let externalLink = "https://history.state.gov/countries/"
+	let name = String(config.countryShown.name.common.toLowerCase())
+
+	name = name.replace(" ", "-")
+
+	let finalLink = externalLink + name
+	window.open(finalLink, "_blank")
+}
+knowMoreBtn.addEventListener("click", knowMoreAbout)
+
 //Animation Search Icon & Inputs Functions
 const linkGithubBtn = document.querySelector(".linkGithubBtn")
 const faGithub = document.querySelector(".fa-github")
+const backBtn = document.querySelector("#backBtn")
+
 linkGithubBtn.addEventListener("mouseover", () => {
-	if(!faGithub.classList.contains("fa-flip")) faGithub.classList.add("fa-flip")
+	if (!faGithub.classList.contains("fa-flip")) faGithub.classList.add("fa-flip")
 })
 linkGithubBtn.addEventListener("mouseout", () => {
-	if(faGithub.classList.contains("fa-flip")) faGithub.classList.remove("fa-flip")
+	if (faGithub.classList.contains("fa-flip")) faGithub.classList.remove("fa-flip")
 })
-document.querySelector("#backBtn").addEventListener("click", () => {
+backBtn.addEventListener("click", () => {
+	config.countryShown = undefined
 	changeInputs()
 	containerSection.innerHTML = ""
 	containerSection.appendChild(container)
@@ -386,7 +459,6 @@ const chooseRadio = [...document.querySelectorAll(".chooseRadio > label")]
 // Translate existing tags
 const mainTitle = document.querySelector("#mainTitle")
 const changeMode = document.querySelector(".changeMode")
-const backBtn = document.querySelector("#backBtn")
 const filterDefault = document.querySelector("#filterDefault")
 
 const handleChangeTranslate = (evt) => {
@@ -395,7 +467,6 @@ const handleChangeTranslate = (evt) => {
 
 	let radioValue = evt ? evt.target.previousElementSibling.value : config.selectedIdiom
 	config.selectedIdiom = radioValue
-	console.log(config.selectedIdiom)
 	let phrase = idiom[`${radioValue}`]
 	let sel = config.sunMoonIcon == "fa-moon" ? 0 : 1
 
@@ -406,6 +477,17 @@ const handleChangeTranslate = (evt) => {
 	loadedCountries[0].innerHTML = phrase.display
 	filterDefault.innerHTML = phrase.filter
 
+	;[...knowMoreBtn.children].filter((el) => {
+		if (el.localName == "span") {
+			el.innerText = idiom[config.selectedIdiom].knowMoreBtnTxt
+		}
+	})
+	;[...notWorkingBtn.children].filter((el) => {
+		if (el.localName == "span") {
+			el.innerText = idiom[config.selectedIdiom].notWorkingBtnTxt
+		}
+	})
+
 	container.innerHTML = ""
 	searchBar.value = ""
 
@@ -415,7 +497,6 @@ chooseRadio.forEach((el) => el.addEventListener("click", handleChangeTranslate))
 
 const colorPallete = ["#ffffff", "#2b3945", "#314354", "#111517", "#fafafa", "#fafafa"]
 const handleChangeMode = (evt) => {
-	console.log(config)
 	let switchPallete = config.sunMoonIcon != "fa-sun" ? true : false
 
 	if (evt) {
@@ -446,7 +527,6 @@ const handleChangeMode = (evt) => {
 	}
 
 	switchPallete = config.sunMoonIcon != "fa-sun" ? true : false
-	console.log(config)
 }
 changeMode.addEventListener("click", handleChangeMode)
 
