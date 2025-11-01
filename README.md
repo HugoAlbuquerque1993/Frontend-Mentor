@@ -1,4 +1,4 @@
-# Desafios do site Frontend Mentor
+# Challenges of the Frontend Mentor website
 
 ## Difficulty 1: Newbie
 
