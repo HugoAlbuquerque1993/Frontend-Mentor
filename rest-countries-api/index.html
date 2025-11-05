@@ -1,83 +1,93 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Rest Countries API</title>
-		<link rel="stylesheet" href="style.css" />
-		<script src="https://kit.fontawesome.com/f5dd4dba75.js" crossorigin="anonymous"></script>
-	</head>
-	<body>
-		<header>
-			<section class="positionContent">
-				<h2 id="mainTitle">Where's in the world?</h2>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rest Countries API</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/f5dd4dba75.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <header>
+      <section class="positionContent">
+        <h2 id="mainTitle">Where's in the world?</h2>
 
-				<div class="headerConfig">
-					<button class="linkGithubBtn" title="See Source Code in GitHub">
-						<a href="https://github.com/HugoAlbuquerque1993/Frontend-Mentor/tree/main/rest-countries-api">
-							<i class="fa-brands fa-github fa-2xl"></i>
-						</a>
-					</button>
-					<button class="changeMode" title="Altern">
-						<i class="fa-regular fa-moon fa-spin"></i>
-						Dark Mode
-					</button>
-				</div>
-			</section>
-		</header>
+        <div class="headerConfig">
+          <button class="linkGithubBtn" title="See Source Code in GitHub">
+            <a
+              href="https://github.com/HugoAlbuquerque1993/Frontend-Mentor/tree/main/rest-countries-api"
+            >
+              <i class="fa-brands fa-github fa-2xl"></i>
+            </a>
+          </button>
+          <button class="changeMode" title="Altern">
+            <i class="fa-regular fa-moon fa-spin"></i>
+            Dark Mode
+          </button>
+        </div>
+      </section>
+    </header>
 
-		<main>
-			<section class="filteringArea positionContent">
-				<div class="hiddenBackDiv">
-					<button id="backBtn">
-						<i class="fa-solid fa-backward fa-beat-fade"></i>
-						Back
-					</button>
-					<div style="display: flex; gap: 10px;">
-						<button id="notWorkingBtn">
-							<i class="fa-solid fa-heart-crack fa-flip"></i>
-							<span>Not working?</span>
-						</button>
-						<button id="knowMoreBtn">
-							<span>Know More About</span>
-							<i class="fa-solid fa-arrow-up-right-from-square fa-beat-fade" style="margin-left: 8px; margin-right: 0px;"></i>
-						</button>
-					</div>
-				</div>
+    <main>
+      <section class="filteringArea positionContent">
+        <div class="hiddenBackDiv">
+          <button id="backBtn">
+            <i class="fa-solid fa-backward fa-beat-fade"></i>
+            Back
+          </button>
+          <div style="display: flex; gap: 10px">
+            <button id="notWorkingBtn">
+              <i class="fa-solid fa-heart-crack fa-flip"></i>
+              <span>Not working?</span>
+            </button>
+            <button id="knowMoreBtn">
+              <span>Know More About</span>
+              <i
+                class="fa-solid fa-arrow-up-right-from-square fa-beat-fade"
+                style="margin-left: 8px; margin-right: 0px"
+              ></i>
+            </button>
+          </div>
+        </div>
 
-				<div class="searchDiv" style="position: relative">
-					<i id="searchIcon" class="fa-solid fa-magnifying-glass"></i>
-					<input type="search" id="searchBar" placeholder="Search for a country..." autocomplete="off" />
-				</div>
+        <div class="searchDiv" style="position: relative">
+          <i id="searchIcon" class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="search"
+            id="searchBar"
+            placeholder="Search for a country..."
+            autocomplete="off"
+          />
+        </div>
 
-				<div class="chooseRadio">
-					<input type="radio" name="translate" id="EnglishRadio" value="eng" checked />
-					<label for="EnglishRadio"> English </label>
+        <div class="chooseRadio">
+          <input type="radio" name="translate" id="EnglishRadio" value="eng" checked />
+          <label for="EnglishRadio"> English </label>
 
-					<input type="radio" name="translate" id="PortugueseRadio" value="por" />
-					<label for="PortugueseRadio"> Português </label>
-				</div>
+          <input type="radio" name="translate" id="PortugueseRadio" value="por" />
+          <label for="PortugueseRadio"> Português </label>
+        </div>
 
-				<div class="loadedCountries">
-					<span>Loaded Countries</span>:
-					<span>00</span>
-				</div>
+        <div class="loadedCountries">
+          <span>Loaded Countries</span>:
+          <span>00</span>
+        </div>
 
-				<select id="filterByRegion" name="filterByRegion" aria-label="Filter">
-					<option id="filterDefault" value="null">Filter by Region</option>
-					<option value="Africa">Africa</option>
-					<option value="Americas">America</option>
-					<option value="Asia">Asia</option>
-					<option value="Europe">Europa</option>
-					<option value="Oceania">Oceania</option>
-				</select>
-			</section>
+        <select id="filterByRegion" name="filterByRegion" aria-label="Filter">
+          <option id="filterDefault" value="null">Filter by Region</option>
+          <option value="Africa">Africa</option>
+          <option value="Americas">America</option>
+          <option value="Asia">Asia</option>
+          <option value="Europe">Europa</option>
+          <option value="Oceania">Oceania</option>
+        </select>
+      </section>
 
-			<section class="containerSection positionContent" style="justify-content: center">
-				<div class="container"></div>
-			</section>
-		</main>
+      <section class="containerSection positionContent" style="justify-content: center">
+        <div class="container"></div>
+      </section>
+    </main>
 
-		<script src="script.js" type="module" defer></script>
-	</body>
+    <script src="script.js" type="module" defer></script>
+  </body>
 </html>
